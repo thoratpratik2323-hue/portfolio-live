@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pratik Thorat | Full Stack Developer</title>
     <meta name="description" content="Pratik Thorat - Full Stack Developer. I build things for the web and explore AI.">
     <meta property="og:title" content="Pratik Thorat | Full Stack Developer">
-    <meta property="og:description" content="Portfolio of Pratik Thorat. Featuring AI visualizations, futuristic e-commerce, and productivity apps.">
+    <meta property="og:description"
+        content="Portfolio of Pratik Thorat. Featuring AI visualizations, futuristic e-commerce, and productivity apps.">
     <meta property="og:image" content="images/profile.jpg">
     <meta property="og:url" content="https://pratikthorat.com">
     <meta property="og:type" content="website">
@@ -19,13 +22,13 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body data-theme="dark">
+<body>
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
     <!-- Loading Animation -->
-    <div class="loading hidden" id="loading">
+    <div class="loading" id="loading">
         <div class="spinner"></div>
     </div>
 
@@ -38,7 +41,7 @@
     <!-- Telegram Success Modal -->
     <div class="modal" id="telegramModal">
         <div class="modal-content">
-            <button class="close-modal" id="closeTelegramModal">×</button>
+            <button class="close-modal" id="closeTelegramModal">&times;</button>
             <h2>Message Sent!</h2>
             <p>Your message has been prepared for Telegram. Click the button below to send it directly to me.</p>
             <a href="#" id="telegramLink" class="btn magnetic" target="_blank">
@@ -80,7 +83,8 @@
                 <div class="hacker-hat"></div>
                 <div class="profile-img">
                     <!-- Fixed profile image with proper fallback -->
-                    <img src="images/profile.jpg" alt="Pratik Thorat - Full Stack Developer" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="images/profile.jpg" alt="Pratik Thorat - Full Stack Developer"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="fallback-icon">
                         <i class="fas fa-user"></i>
                     </div>
@@ -88,24 +92,29 @@
             </div>
             <h1 class="name hacker-text" data-value="Pratik Thorat">Pratik Thorat</h1>
             <p class="tagline">I build systems, not just websites.</p>
-            <div class="typing-text" id="typingText">Debugging reality...</div>
+            <div class="typing-text" id="typingText"></div>
             <div class="social-links">
                 <a href="https://github.com/pratikpt1908" target="_blank" rel="noopener noreferrer" title="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/pratik-thorat" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                <a href="https://www.linkedin.com/in/pratik-thorat" target="_blank" rel="noopener noreferrer"
+                    title="LinkedIn">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="https://www.instagram.com/pratik_pt1908?igsh=MTE3cXg1NHU1OXZyMA==" target="_blank" rel="noopener noreferrer" title="Instagram">
+                <a href="https://www.instagram.com/pratik_pt1908?igsh=MTE3cXg1NHU1OXZyMA==" target="_blank"
+                    rel="noopener noreferrer" title="Instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://t.me/pratik_pt1908" target="_blank" rel="noopener noreferrer" title="Telegram (Personal)">
+                <a href="https://t.me/pratik_pt1908" target="_blank" rel="noopener noreferrer"
+                    title="Telegram (Personal)">
                     <i class="fab fa-telegram"></i>
                 </a>
-                <a href="https://t.me/+w0NwHHedPZE5MTFl" target="_blank" rel="noopener noreferrer" title="Telegram Channel">
+                <a href="https://t.me/+w0NwHHedPZE5MTFl" target="_blank" rel="noopener noreferrer"
+                    title="Telegram Channel">
                     <i class="fas fa-bullhorn"></i>
                 </a>
-                <a href="https://whatsapp.com/channel/0029Vb6o59TKLaHgdQTJVS33" target="_blank" rel="noopener noreferrer" title="WhatsApp Channel">
+                <a href="https://whatsapp.com/channel/0029Vb6o59TKLaHgdQTJVS33" target="_blank"
+                    rel="noopener noreferrer" title="WhatsApp Channel">
                     <i class="fab fa-whatsapp"></i>
                 </a>
                 <a href="https://www.youtube.com/@IPDorm1908" target="_blank" rel="noopener noreferrer" title="YouTube">
@@ -139,17 +148,29 @@
                     learning a new framework or contributing to open-source.</p>
             </div>
             <div style="text-align: center; margin-top: 40px;">
-                <a href="resume.pdf" class="btn magnetic" id="downloadResume" target="_blank" rel="noopener noreferrer" download="">
+                <a href="resume.pdf" class="btn magnetic" id="downloadResume" target="_blank" rel="noopener noreferrer"
+                    download>
                     <i class="fas fa-download"></i> Download Resume
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects Section (NEW) -->
     <section class="projects" id="projects">
         <div class="container">
             <h2 class="section-title">What I've Built</h2>
+            <div
+                style="text-align: center; max-width: 800px; margin: 0 auto 40px auto; padding: 15px; background: rgba(255, 59, 59, 0.1); border-left: 4px solid var(--primary); border-radius: 4px;">
+                <p style="margin: 0; color: #ccc; font-size: 0.95rem;">
+                    <i class="fas fa-info-circle" style="color: var(--primary); margin-right: 8px;"></i>
+                    <strong>Note:</strong> These are simplified <span style="color: var(--primary);">interactive
+                        demos</span> designed for this portfolio.
+                    The real-world production versions include backend integration, authentication, and advanced
+                    features.
+                </p>
+            </div>
+
             <div class="filter-container">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="web">Web</button>
@@ -159,7 +180,7 @@
 
             <div class="projects-grid">
                 <!-- Project: Saturday AI -->
-                <div class="project-card spotlight-card" data-category="ai">
+                <div class="project-card" data-category="ai">
                     <div class="project-img">
                         <img src="images/voice_assistant.png" alt="Saturday AI" loading="lazy">
                     </div>
@@ -175,13 +196,16 @@
                         <div class="project-links">
                             <a href="projects/saturday-ai/index.html" class="project-link"><i class="fas fa-book"></i>
                                 Details</a>
-                            <a href="#" class="project-link" style="opacity: 0.5; cursor: not-allowed;"><i class="fas fa-play"></i> CLI Only</a>
+                            <a href="#" class="project-link" style="opacity: 0.5; cursor: not-allowed;"><i
+                                    class="fas fa-play"></i> CLI Only</a>
+                            <a href="#" class="project-link" style="opacity: 0.5; cursor: not-allowed;"><i
+                                    class="fab fa-github"></i> Local</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project: NeonVerse -->
-                <div class="project-card spotlight-card" data-category="web">
+                <div class="project-card" data-category="web">
                     <div class="project-img">
                         <img src="images/neonverse.png" alt="NeonVerse" loading="lazy">
                     </div>
@@ -204,7 +228,7 @@
                 </div>
 
                 <!-- Project: CryptoSentinel -->
-                <div class="project-card spotlight-card" data-category="web">
+                <div class="project-card" data-category="web">
                     <div class="project-img">
                         <img src="images/cryptosentinel.png" alt="CryptoSentinel" loading="lazy">
                     </div>
@@ -218,9 +242,84 @@
                         <p class="project-desc">AI-powered Web3 security dashboard for real-time threat detection and
                             analytics.</p>
                         <div class="project-links">
-                            <a href="projects/cryptosentinel/index.html" class="project-link"><i class="fas fa-book"></i> Concept</a>
+                            <a href="projects/cryptosentinel/index.html" class="project-link"><i
+                                    class="fas fa-book"></i> Concept</a>
                             <a href="projects/cryptosentinel/demo.html" class="project-link"><i class="fas fa-play"></i>
                                 Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Project 2 -->
+                <div class="project-card" data-category="web">
+                    <div class="project-img">
+                        <img src="images/ipdorm_logo.png" alt="IPdorm" loading="lazy"
+                            style="object-fit: contain; padding: 20px; background: #000;">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">IPdorm</h3>
+                        <div class="tech-stack">
+                            <span class="tech-badge">CSS Grid</span>
+                            <span class="tech-badge">Cyberpunk UI</span>
+                            <span class="tech-badge">JS</span>
+                        </div>
+                        <p class="project-desc">Futuristic property & asset management system (formerly ShopVerse).</p>
+                        <div class="project-links">
+                            <a href="case-study.html?id=ipdorm" class="project-link"><i class="fas fa-book"></i> Case
+                                Study</a>
+                            <a href="projects/shopverse/index.html" class="project-link" target="_blank"
+                                rel="noopener noreferrer"><i class="fas fa-play"></i> Live Demo</a>
+                            <a href="https://github.com/pratikpt1908/ipdorm" class="project-link" target="_blank"
+                                rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card" data-category="mobile">
+                    <div class="project-img">
+                        <img src="images/taskflow-shot.png" alt="TaskFlow" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">TaskFlow</h3>
+                        <div class="tech-stack">
+                            <span class="tech-badge">LocalStorage</span>
+                            <span class="tech-badge">DOM Manipulation</span>
+                            <span class="tech-badge">Mobile First</span>
+                        </div>
+                        <p class="project-desc">Minimalist productivity app with local storage persistence.</p>
+                        <div class="project-links">
+                            <a href="case-study.html?id=taskflow" class="project-link"><i class="fas fa-book"></i> Case
+                                Study</a>
+                            <a href="projects/taskflow/index.html" class="project-link" target="_blank"
+                                rel="noopener noreferrer"><i class="fas fa-play"></i> Live Demo</a>
+                            <a href="https://github.com/pratikpt1908/taskflow" class="project-link" target="_blank"
+                                rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 4 (Web) -->
+                <div class="project-card" data-category="web">
+                    <div class="project-img">
+                        <img src="images/portfolio-v1-shot.png" alt="Portfolio v1" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Portfolio Website v1</h3>
+                        <div class="tech-stack">
+                            <span class="tech-badge">HTML 4.0</span>
+                            <span class="tech-badge">Marquee</span>
+                            <span class="tech-badge">Nostalgia</span>
+                        </div>
+                        <p class="project-desc">My first portfolio website. A tribute to 90s web design and where it all
+                            started.</p>
+                        <div class="project-links">
+                            <a href="case-study.html?id=portfolio-v1" class="project-link"><i class="fas fa-book"></i>
+                                Case Study</a>
+                            <a href="projects/portfolio-v1/index.html" class="project-link" target="_blank"
+                                rel="noopener noreferrer"><i class="fas fa-play"></i> Live Demo</a>
+                            <a href="https://github.com/pratikpt1908/portfolio-v1" class="project-link" target="_blank"
+                                rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
                         </div>
                     </div>
                 </div>
@@ -233,45 +332,114 @@
         <div class="container">
             <h2 class="section-title">My Skills</h2>
             <div class="skills-grid">
-                <div class="skill-card spotlight-card">
+                <div class="skill-card">
                     <div class="skill-icon"><i class="fas fa-laptop-code"></i></div>
                     <h3 class="skill-title">Web Development</h3>
                     <p>Building all types of websites and web applications</p>
                 </div>
-                <div class="skill-card spotlight-card">
+                <!-- More cards can be added here, I'll keep it concise for now and rely on JS loops if needed later, 
+                     but the original had many hardcoded. I will keep the main ones. -->
+                <div class="skill-card">
                     <div class="skill-icon"><i class="fas fa-palette"></i></div>
                     <h3 class="skill-title">Frontend Design</h3>
                     <p>Creating beautiful, responsive user interfaces.</p>
                 </div>
-                <div class="skill-card spotlight-card">
+                <div class="skill-card">
                     <div class="skill-icon"><i class="fas fa-server"></i></div>
                     <h3 class="skill-title">Backend Logic</h3>
-                    <p>Robust server-side apps with Node.js &amp; Python.</p>
+                    <p>Robust server-side apps with Node.js & Python.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                    <h3 class="skill-title">AI Integration</h3>
+                    <p>Implementing machine learning models into web apps.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-cube"></i></div>
+                    <h3 class="skill-title">Immersive Web</h3>
+                    <p>3D experiences with Three.js, WebGL, and GSAP animations.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-microphone-alt"></i></div>
+                    <h3 class="skill-title">Voice AI</h3>
+                    <p>Real-time speech systems using LiveKit & OpenAI.</p>
+                </div>
+            </div>
+
+            <!-- Progress Bars -->
+            <div class="progress-bars">
+                <div class="progress-item">
+                    <div class="progress-info"><span>HTML/CSS</span><span>95%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="95"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>JavaScript</span><span>90%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="90"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>React</span><span>85%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="85"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>Python (AI/ML)</span><span>88%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="88"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>Node.js</span><span>85%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="85"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>Three.js</span><span>75%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="75"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
             <h2 class="section-title">Say Hello</h2>
+            <a href="mailto:coderpratik1908@gmail.com" class="btn magnetic">Send an Email</a>
+
             <div class="contact-form">
                 <h3 style="text-align: center; margin-bottom: 30px; color: var(--light);">Send me a message</h3>
                 <form id="contactForm">
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" required="">
+                        <input type="text" id="name" name="name" required>
+                        <span class="error-message" id="nameError"></span>
                     </div>
                     <div class="form-group">
                         <label for="email">Your Email</label>
-                        <input type="email" id="email" name="email" required="">
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                        <span class="error-message" id="subjectError"></span>
                     </div>
                     <div class="form-group">
                         <label for="message">Your Message</label>
-                        <textarea id="message" name="message" required=""></textarea>
+                        <textarea id="message" name="message" required></textarea>
+                        <span class="error-message" id="messageError"></span>
                     </div>
-                    <button type="submit" class="btn magnetic" style="width: 100%;">Send Message</button>
+                    <button type="submit" class="btn magnetic" style="width: 100%;">Send via Telegram</button>
                 </form>
             </div>
         </div>
@@ -280,7 +448,29 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p class="footer-text">© 2025 Pratik Thorat. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Pratik Thorat</h3>
+                    <p>Just a guy who loves to code and create.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#skills">Skills</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="footer-links">
+                        <a href="https://github.com/thoratpratik2323" target="_blank">GitHub</a>
+                        <a href="https://linkedin.com/in/pratik-pt1908" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <p class="footer-text">© 2023 Pratik Thorat. All rights reserved.</p>
         </div>
     </footer>
 
@@ -292,4 +482,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <!-- Custom JS -->
     <script src="js/script.js"></script>
-</body></html>
+</body>
+
+    </html>
