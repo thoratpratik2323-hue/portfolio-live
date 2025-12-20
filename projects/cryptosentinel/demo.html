@@ -1,0 +1,361 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoSentinel | Security Dashboard</title>
+    <style>
+        :root {
+            --bg: #050a07;
+            --panel: #0d1a12;
+            --accent: #00ff6a;
+            --text: #e0e0e0;
+            --danger: #ff3b3b;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Consolas', monospace;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 250px 1fr 300px;
+            grid-template-rows: 60px 1fr 200px;
+            gap: 20px;
+            height: 95vh;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-badge {
+            background: rgba(0, 255, 106, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .sidebar,
+        .main,
+        .logs,
+        .metrics {
+            background: var(--panel);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar {
+            grid-row: 2 / -1;
+        }
+
+        .nav-item {
+            padding: 12px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            border-left: 2px solid transparent;
+            color: #888;
+            transition: 0.2s;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(0, 255, 106, 0.05);
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+
+        .main {
+            grid-column: 2;
+            grid-row: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .graph-container {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .graph-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .metrics {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        .metric-box {
+            margin-bottom: 20px;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .metric-delta {
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .metric-delta.neg {
+            color: var(--danger);
+        }
+
+        .logs {
+            grid-column: 2 / -1;
+            grid-row: 3;
+            overflow-y: hidden;
+        }
+
+        .log-header {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .log-entry {
+            font-size: 0.8rem;
+            padding: 4px 0;
+            border-bottom: 1px solid #1a3324;
+            display: flex;
+            justify-content: space-between;
+            font-family: monospace;
+        }
+
+        .log-hash {
+            color: var(--accent);
+        }
+
+        .log-risk {
+            color: var(--danger);
+        }
+
+        .radar {
+            width: 100%;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 255, 106, 0.1) 0%, transparent 70%);
+            border: 1px solid #333;
+            border-radius: 50%;
+            position: relative;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .radar-scan {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent 270deg, rgba(0, 255, 106, 0.5) 360deg);
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .exit-btn {
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            background: transparent;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        .exit-btn:hover {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .grid {
+                display: flex;
+                flex-direction: column;
+                height: auto;
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .sidebar {
+                order: 2;
+                height: auto;
+            }
+
+            .metrics {
+                order: 1;
+                display: flex;
+                gap: 10px;
+                overflow-x: auto;
+                padding-bottom: 20px;
+            }
+
+            .metric-box {
+                flex: 1;
+                min-width: 120px;
+                margin-bottom: 0;
+            }
+
+            .main {
+                height: 400px;
+                order: 0;
+            }
+
+            body {
+                overflow: auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="">
+    <div class="grid">
+        <header class="header">
+            <div class="logo"><i class="fas fa-shield-alt"></i> CryptoSentinel</div>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <span class="status-badge">SYSTEM ACTIVE</span>
+                <span id="clock">18:00:49 UTC</span>
+                <button class="exit-btn" onclick="window.location.href='index.html'">DISCONNECT</button>
+            </div>
+        </header>
+
+        <aside class="sidebar">
+            <div class="nav-item active">Live Monitoring</div>
+            <div class="nav-item">Threat Intelligence</div>
+            <div class="nav-item">Wallet Profiling</div>
+            <div class="nav-item">Smart Contract Audits</div>
+            <div class="nav-item">Settings</div>
+
+            <div class="radar">
+                <div class="radar-scan"></div>
+            </div>
+            <div style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: #888;">SCANNING NETWORK...</div>
+        </aside>
+
+        <main class="main">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>Transaction Velocity (ETH Mainnet)</h3>
+                <select style="background: #000; color: #fff; border: 1px solid #333; padding: 5px;">
+                    <option>Last 1 Hour</option>
+                    <option>24 Hours</option>
+                </select>
+            </div>
+            <div class="graph-container">
+                <svg width="100%" height="100%" viewBox="0 0 800 300" preserveAspectRatio="none">
+                    <path class="graph-line" d="M0,250 Q100,200 200,220 T400,150 T600,180 T800,50" style="stroke: #00ff6a; fill: none; stroke-width: 2;"></path>
+                    <!-- Animated fake data points -->
+                    <circle cx="800" cy="50" r="4" fill="#fff">
+                        <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"></animate>
+                    </circle>
+                </svg>
+            </div>
+        </main>
+
+        <div class="metrics">
+            <div class="metric-box">
+                <div class="metric-label">THREAT LEVEL</div>
+                <div class="metric-value" style="color: #ff3b3b;">HIGH</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-label">FLAGGED TXs</div>
+                <div class="metric-value">1,204</div>
+                <div class="metric-delta">+12%</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-label">PROTECTED VALUE</div>
+                <div class="metric-value">$4.2B</div>
+                <div class="metric-delta">+0.5%</div>
+            </div>
+        </div>
+
+        <section class="logs">
+            <div class="log-header">LIVE TRANSACTION FEED</div>
+            <div id="log-container"></div>
+        </section>
+    </div>
+
+    <script>
+        // Clock
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toISOString().split('T')[1].split('.')[0] + ' UTC';
+        }, 1000);
+
+        // Fake Logs Generator
+        const logContainer = document.getElementById('log-container');
+        const risks = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'];
+
+        function addLog() {
+            const hash = '0x' + Math.random().toString(16).substr(2, 10) + '...';
+            const risk = risks[Math.floor(Math.random() * risks.length)];
+            const value = (Math.random() * 100).toFixed(4) + ' ETH';
+
+            const div = document.createElement('div');
+            div.className = 'log-entry';
+            div.innerHTML = `
+                <span><span class="log-hash">${hash}</span> - ${value}</span>
+                <span class="log-risk" style="color: ${risk === 'LOW' ? '#00ff6a' : (risk === 'MEDIUM' ? '#ffd700' : '#ff3b3b')}">${risk}</span>
+            `;
+
+            logContainer.prepend(div);
+            if (logContainer.children.length > 5) {
+                logContainer.removeChild(logContainer.lastChild);
+            }
+        }
+
+        setInterval(addLog, 800);
+
+        // Initial logs
+        for (let i = 0; i < 5; i++) addLog();
+    </script>
+</body></html>
