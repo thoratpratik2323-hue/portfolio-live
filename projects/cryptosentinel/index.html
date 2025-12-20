@@ -1,0 +1,101 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoSentinel | Pratik Thorat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .project-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(180deg, #001f0f, #121212);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #00ff6a, #0b492b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 100;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .concept-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background: rgba(0, 255, 106, 0.1);
+            border: 1px solid #00ff6a;
+            color: #00ff6a;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body class="">
+    <a href="../../mypage.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+    <section class="project-hero">
+        <div class="hero-content">
+            <span class="concept-badge">AI ANALYTICS SUITE</span>
+            <h1 class="project-title hacker-text" data-value="CRYPTOSENTINEL">CRYPTOSENTINEL</h1>
+            <p style="font-size: 1.2rem; color: var(--gray);">Advanced On-Chain Security Dashboard</p>
+        </div>
+    </section>
+
+    <div class="container" style="padding: 50px 20px;">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #ccc;">
+                CryptoSentinel combines Machine Learning with Blockchain analytics to detect fraudulent transactions in
+                real-time. It features a D3.js powered visualization engine for tracking fund movements across chains.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 40px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px;">
+                    <i class="fas fa-shield-alt" style="font-size: 2rem; color: #00ff6a; margin-bottom: 10px;"></i>
+                    <h3>Threat Detection</h3>
+                    <p>AI model trained on 10M+ malicious transactions.</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px;">
+                    <i class="fas fa-project-diagram" style="font-size: 2rem; color: #fff; margin-bottom: 10px;"></i>
+                    <h3>Graph Vis</h3>
+                    <p>Interactive node graph of wallet connections.</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px;">
+                    <i class="fab fa-ethereum" style="font-size: 2rem; color: #8c8c8c; margin-bottom: 10px;"></i>
+                    <h3>Multi-Chain</h3>
+                    <p>Supports ETH, SOL, and BSC scaling.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/script.js"></script>
+</body></html>
