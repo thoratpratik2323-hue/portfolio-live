@@ -1,0 +1,102 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonVerse | Pratik Thorat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .project-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(45deg, #2b0042, #121212);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #d000ff, #00f3ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 100;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .concept-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body class="">
+    <a href="../../mypage.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+    <section class="project-hero">
+        <div class="hero-content">
+            <span class="concept-badge">CONCEPTUAL PROTOTYPE</span>
+            <h1 class="project-title hacker-text" data-value="NEONVERSE">NEONVERSE</h1>
+            <p style="font-size: 1.2rem; color: var(--gray);">Immersive 3D Metaverse Platform</p>
+        </div>
+    </section>
+
+    <div class="container" style="padding: 50px 20px;">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #ccc;">
+                NeonVerse is a high-fidelity 3D social platform built directly in the browser. It leverages WebGL to
+                render cyberpunk cityscapes where users can interact, trade NFTs, and attend virtual events in
+                real-time.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 40px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px;">
+                    <i class="fas fa-cube" style="font-size: 2rem; color: #d000ff; margin-bottom: 10px;"></i>
+                    <h3>Three.js Core</h3>
+                    <p>Physics-based rendering engine.</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px;">
+                    <i class="fas fa-network-wired" style="font-size: 2rem; color: #00f3ff; margin-bottom: 10px;"></i>
+                    <h3>Socket.io</h3>
+                    <p>Real-time multiplayer synchronization.</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px;">
+                    <i class="fas fa-vr-cardboard" style="font-size: 2rem; color: #ff0055; margin-bottom: 10px;"></i>
+                    <h3>WebXR</h3>
+                    <p>VR headset compatibility ready.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/script.js"></script>
+</body></html>
