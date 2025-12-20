@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonVerse | Live Demo</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .hud-panel {
+            border: 1px solid #00f3ff;
+            background: rgba(0, 243, 255, 0.1);
+            padding: 15px;
+            width: 250px;
+            color: #00f3ff;
+            backdrop-filter: blur(5px);
+            pointer-events: auto;
+        }
+
+        .top-left {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .bottom-right {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            text-align: right;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            background: #00f3ff;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            width: 100%;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: #fff;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00f3ff;
+            font-size: 2rem;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">CONNECTING TO NEONVERSE...</div>
+    <div id="ui-layer" style="display:none">
+        <div class="hud-panel top-left">
+            <h1>NeonVerse Client</h1>
+            <div class="stat"><span>USERS ONLINE:</span> <span id="users">4,292</span></div>
+            <div class="stat"><span>SERVER:</span> <span>ASIA-EAST-1</span></div>
+            <div class="stat"><span>FPS:</span> <span id="fps">0</span></div>
+            <div class="stat"><span>PING:</span> <span>12ms</span></div>
+        </div>
+        <div class="hud-panel bottom-right">
+            <h1>System Status</h1>
+            <div class="stat"><span>RENDERER:</span> <span>WEBGL 2.0</span></div>
+            <div class="stat"><span>PHYSICS:</span> <span>ACTIVE</span></div>
+            <button class="btn" onclick="window.location.href='index.html'">EXIT SIMULATION</button>
+        </div>
+    </div>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Simulation Setup
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x000510, 0.002);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 5, 20);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Grid (The Floor)
+        const gridHelper = new THREE.GridHelper(200, 50, 0xd000ff, 0x2b0042);
+        scene.add(gridHelper);
+
+        // Cyberpunk Buildings (Random Cubes)
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.MeshPhongMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.8 });
+
+        for (let i = 0; i < 150; i++) {
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.position.x = (Math.random() - 0.5) * 150;
+            mesh.position.z = (Math.random() - 0.5) * 150 - 20; // Keep mostly in front/dist
+            mesh.position.y = Math.random() * 5; // Height center
+            mesh.scale.y = Math.random() * 10 + 2; // Tall buildings
+            mesh.scale.x = Math.random() * 2 + 1;
+            mesh.scale.z = Math.random() * 2 + 1;
+            scene.add(mesh);
+        }
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0xd000ff, 1, 100);
+        pointLight.position.set(0, 20, 0);
+        scene.add(pointLight);
+
+        // Moving Light (Car simulated)
+        const carLight = new THREE.PointLight(0xffff00, 2, 20);
+        scene.add(carLight);
+
+        // Animation Loop
+        let frameCount = 0;
+        let time = 0;
+
+        // Initialize UI
+        setTimeout(() => {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('ui-layer').style.display = 'block';
+        }, 1500);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.01;
+
+            // Camera Movement
+            camera.position.z -= 0.1;
+            camera.position.x = Math.sin(time * 0.5) * 5;
+            camera.lookAt(0, 0, camera.position.z - 50);
+
+            // Infinite Grid Loop
+            if (camera.position.z < -50) {
+                camera.position.z = 20;
+            }
+
+            // Moving Light
+            carLight.position.set(Math.sin(time * 2) * 20, 2, camera.position.z - 20);
+
+            // FPS Counter Mock
+            frameCount++;
+            if (frameCount % 30 === 0) {
+                document.getElementById('fps').innerText = Math.floor(55 + Math.random() * 10);
+                document.getElementById('users').innerText = (4291 + Math.floor(Math.sin(time) * 100)).toLocaleString();
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Resize Handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
