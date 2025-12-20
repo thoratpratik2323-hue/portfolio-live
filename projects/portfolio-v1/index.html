@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pratik's Homepage v1.0</title>
+    <style>
+        body {
+            background-color: #000080;
+            /* Classic Navy Blue */
+            color: #FFFF00;
+            /* Yellow Text */
+            font-family: "Times New Roman", Times, serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #FF0000;
+            text-decoration: underline;
+            font-size: 3em;
+        }
+
+        marquee {
+            color: #00FF00;
+            font-size: 1.5em;
+            background-color: #000;
+            border: 2px solid white;
+        }
+
+        hr {
+            border: 2px solid #C0C0C0;
+        }
+
+        .container {
+            width: 800px;
+            margin: 0 auto;
+            background-color: #C0C0C0;
+            /* Windows 95 Grey */
+            color: black;
+            border: 5px outset #fff;
+            padding: 20px;
+        }
+
+        .menu a {
+            font-size: 1.2em;
+            margin: 0 10px;
+            color: blue;
+        }
+
+        .construction {
+            margin-top: 50px;
+        }
+
+        blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <marquee scrollamount="10">*** WELCOME TO PRATIK'S WORLD *** BEST VIEWED IN INTERNET EXPLORER 5.0 ***</marquee>
+
+    <br><br>
+
+    <div class="container">
+        <h1>Welcome to My Website</h1>
+        <hr>
+
+        <p>Hi, I am Pratik. This is my first HTML page!</p>
+
+        <div class="menu">
+            [ <a href="#">Home</a> ]
+            [ <a href="#">About</a> ]
+            [ <a href="#">My Links</a> ]
+            [ <a href="mailto:fake@email.com">Email Me</a> ]
+        </div>
+
+        <br>
+        <img src="../../images/portfolio-v1.png" width="200" border="5" style="border-color: red;">
+        <br>
+        <small><i>(My cool logo)</i></small>
+
+        <h2>~ Updates ~</h2>
+        <ul>
+            <li><b>Dec 2023:</b> Learned the &lt;blink&gt; tag!</li>
+            <li><b>Nov 2023:</b> Added a hit counter.</li>
+            <li><b>Oct 2023:</b> Hello World!</li>
+        </ul>
+
+        <div class="construction">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5eXhmZ3Z5eXhmZ3Z5eXhmZ3Z5eXhmZ3Z5eXhmZ3Z5eXhmZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L2r3r1hI9lIqI/giphy.gif" alt="Under Construction">
+            <p>
+                <blink>UNDER CONSTRUCTION</blink>
+            </p>
+        </div>
+
+        <br><br>
+        You are visitor number: <b>1337</b>
+    </div>
+
+    <br><br>
+    <font color="white">Copyright 2023</font>
+</body>
+</html>
