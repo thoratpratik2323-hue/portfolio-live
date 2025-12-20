@@ -1,0 +1,229 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Case Study</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .case-study-hero {
+            padding: 100px 0 50px;
+            text-align: center;
+        }
+
+        .case-study-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .case-study-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #aaa;
+        }
+
+        .case-img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            margin-bottom: 50px;
+            border: 1px solid #333;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .metric-card {
+            background: rgba(255, 59, 59, 0.05);
+            border: 1px solid var(--primary);
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .metric-val {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .section-header {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--primary);
+            padding-left: 10px;
+            color: #fff;
+        }
+
+        .content-block {
+            margin-bottom: 40px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .back-btn {
+            margin-top: 50px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body data-theme="dark" class="">
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <nav>
+        <div class="container nav-container"><h1>Project not found.</h1></div>
+    </nav>
+
+    <div class="container">
+        <div class="case-study-hero">
+            <h1 class="case-study-title hacker-text" id="title" data-value="Project Name">Project Name</h1>
+            <p class="case-study-subtitle" id="subtitle">A brief overview of the project.</p>
+            <img src="" id="mainImg" class="case-img" alt="Project Screenshot">
+        </div>
+
+        <div class="metrics-grid" id="metrics">
+            <!-- Populated by JS -->
+        </div>
+
+        <div class="content-block">
+            <h2 class="section-header">The Problem</h2>
+            <p id="problem">Loading...</p>
+        </div>
+
+        <div class="content-block">
+            <h2 class="section-header">The Solution</h2>
+            <p id="solution">Loading...</p>
+        </div>
+
+        <div class="content-block">
+            <h2 class="section-header">Tech Stack</h2>
+            <div class="tech-stack" id="stack">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 50px 0;">
+            <a href="#" id="liveLink" class="btn magnetic" target="_blank" rel="noopener noreferrer"><i class="fas fa-play"></i> Live Demo</a>
+            <a href="#" id="codeLink" class="btn magnetic" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> View Code</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>Pratik Thorat</h3>
+                <p>Building systems, not just websites.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-text">© 2023 Pratik Thorat. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Init Case Study Content
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('id');
+
+        const projectData = {
+            'saturday-ai': {
+                title: "Saturday AI",
+                subtitle: "Advanced Visualization HUD for Voice Assistants",
+                img: "images/saturday_ai_cool.png",
+                metrics: [
+                    { label: "Response Time", val: "< 50ms" },
+                    { label: "Visual Latency", val: "Zero" },
+                    { label: "User Delight", val: "100%" }
+                ],
+                problem: "Voice assistants often feel detached and invisible. Users lack visual feedback when interaction occurs, reducing engagement and trust in the AI's processing state.",
+                solution: "I built 'Saturday AI', a Canvas-based HUD inspired by sci-fi interfaces (Jarvis). It visualizes audio input and system states in real-time, providing immediate, high-fidelity feedback to the user.",
+                stack: ["HTML5", "Canvas API", "JavaScript", "CSS Animation"],
+                live: "projects/saturday-ai/index.html",
+                code: "https://github.com/pratikpt1908/saturday-ai"
+            },
+            'ipdorm': {
+                title: "IPdorm",
+                subtitle: "Decentralized Property Management System",
+                img: "images/ipdorm_logo.png",
+                metrics: [
+                    { label: "Transactions", val: "Instant" },
+                    { label: "Security", val: "AES-256" },
+                    { label: "Uptime", val: "99.9%" }
+                ],
+                problem: "Traditional property management is slow, paper-heavy, and opaque. Managing digital or physical assets requires a centralized authority that introduces friction.",
+                solution: "IPdorm reimagines asset management with a cyberpunk aesthetic. It simulates a vault where users can mint, store, and transfer rights to properties instantly using a decentralized-style ledger.",
+                stack: ["CSS Grid", "Cyberpunk UI", "JavaScript", "LocalStorage"],
+                live: "projects/shopverse/index.html",
+                code: "https://github.com/pratikpt1908/ipdorm"
+            },
+            'taskflow': {
+                title: "TaskFlow",
+                subtitle: "Minimalist Productivity Suite",
+                img: "images/taskflow-shot.png",
+                metrics: [
+                    { label: "Load Time", val: "0.2s" },
+                    { label: "Storage", val: "Local" },
+                    { label: "Retention", val: "+40%" }
+                ],
+                problem: "Most to-do apps are bloated with features that distract rather than help. Users need a zero-friction way to capture tasks immediately.",
+                solution: "TaskFlow focuses on speed and persistence. By utilizing LocalStorage and a mobile-first design, it ensures your tasks are always there, instantly, without a login wall.",
+                stack: ["LocalStorage", "DOM API", "Mobile First", "Vanilla JS"],
+                live: "projects/taskflow/index.html",
+                code: "https://github.com/pratikpt1908/taskflow"
+            },
+            'portfolio-v1': {
+                title: "Portfolio v1",
+                subtitle: "A Nostalgic Trip to the 90s Web",
+                img: "images/portfolio-v1-shot.png",
+                metrics: [
+                    { label: "Nostalgia", val: "High" },
+                    { label: "Tech", val: "HTML4" },
+                    { label: "Marquees", val: "Yes" }
+                ],
+                problem: "Modern web design often forgets its roots. I wanted to pay homage to the era that started it all.",
+                solution: "I recreated the constraints of 90s web development: Times New Roman, bright blue backgrounds, marquee tags, and 'Under Construction' GIFs. A true blast from the past.",
+                stack: ["HTML 4.0", "Marquee", "Nostalgia", "CSS"],
+                live: "projects/portfolio-v1/index.html",
+                code: "https://github.com/pratikpt1908/portfolio-v1"
+            }
+        };
+
+        const data = projectData[projectId];
+        if (data) {
+            document.getElementById('title').innerText = data.title;
+            document.getElementById('title').dataset.value = data.title;
+            document.getElementById('subtitle').innerText = data.subtitle;
+            document.getElementById('mainImg').src = data.img;
+            document.getElementById('problem').innerText = data.problem;
+            document.getElementById('solution').innerText = data.solution;
+            document.getElementById('liveLink').href = data.live;
+            document.getElementById('codeLink').href = data.code;
+
+            const metricHtml = data.metrics.map(m => `
+                <div class="metric-card">
+                    <div class="metric-val">${m.val}</div>
+                    <div class="metric-label">${m.label}</div>
+                </div>
+            `).join('');
+            document.getElementById('metrics').innerHTML = metricHtml;
+
+            const stackHtml = data.stack.map(s => `<span class="tech-badge">${s}</span>`).join('');
+            document.getElementById('stack').innerHTML = stackHtml;
+        } else {
+            document.querySelector('.container').innerHTML = '<h1>Project not found.</h1>';
+        }
+    </script>
+</body></html>
