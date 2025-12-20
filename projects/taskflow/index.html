@@ -1,0 +1,245 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow | Productivity</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff3b3b;
+            --dark: #121212;
+            --card: #1e1e1e;
+            --text: #fff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        input {
+            flex: 1;
+            padding: 15px;
+            background: var(--card);
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+        }
+
+        button {
+            padding: 15px 25px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #d32f2f;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-item {
+            background: var(--card);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .task-item.completed span {
+            text-decoration: line-through;
+            color: #666;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: transparent;
+            padding: 5px;
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        .action-btn:hover {
+            color: var(--primary);
+        }
+
+        .check-btn:hover {
+            color: #00e676;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+<style id="antigravity-scroll-lock-style">
+  html:root body.antigravity-scroll-lock {
+    overflow: hidden !important;
+  }
+</style><style>
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+</style></head>
+
+<body class="">
+    <div class="app-container">
+        <div class="header">
+            <div class="logo">
+                <img src="../../images/taskflow.png" alt="TaskFlow">
+                TaskFlow
+            </div>
+            <p>Streamline your workflow.</p>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="Add a new task..." onkeypress="if(event.key === 'Enter') addTask()">
+            <button onclick="addTask()"><i class="fas fa-plus"></i></button>
+        </div>
+
+        <ul class="task-list" id="taskList">
+                <li class="task-item ">
+                    <span>Review Portfolio Code</span>
+                    <div class="task-actions">
+                        <button class="action-btn check-btn" onclick="toggleTask(1)">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="action-btn" onclick="deleteTask(1)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </li>
+            
+                <li class="task-item completed">
+                    <span>Debug Saturday AI</span>
+                    <div class="task-actions">
+                        <button class="action-btn check-btn" onclick="toggleTask(2)">
+                            <i class="fas fa-undo"></i>
+                        </button>
+                        <button class="action-btn" onclick="deleteTask(2)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+    </div>
+
+    <script>
+        // Load tasks from local storage
+        let tasks = JSON.parse(localStorage.getItem('taskflow_tasks')) || [
+            { id: 1, text: "Review Portfolio Code", completed: false },
+            { id: 2, text: "Debug Saturday AI", completed: true }
+        ];
+
+        function saveTasks() {
+            localStorage.setItem('taskflow_tasks', JSON.stringify(tasks));
+            renderTasks();
+        }
+
+        function renderTasks() {
+            const list = document.getElementById('taskList');
+            list.innerHTML = tasks.map(task => `
+                <li class="task-item ${task.completed ? 'completed' : ''}">
+                    <span>${task.text}</span>
+                    <div class="task-actions">
+                        <button class="action-btn check-btn" onclick="toggleTask(${task.id})">
+                            <i class="fas ${task.completed ? 'fa-undo' : 'fa-check'}"></i>
+                        </button>
+                        <button class="action-btn" onclick="deleteTask(${task.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </li>
+            `).join('');
+        }
+
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            const text = input.value.trim();
+            if (text) {
+                tasks.unshift({ id: Date.now(), text: text, completed: false });
+                input.value = '';
+                saveTasks();
+            }
+        }
+
+        function toggleTask(id) {
+            tasks = tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
+            saveTasks();
+        }
+
+        function deleteTask(id) {
+            tasks = tasks.filter(t => t.id !== id);
+            saveTasks();
+        }
+
+        renderTasks();
+    </script>
+
+
+<div id="preact-border-shadow-host" popover="manual" style="border: none; padding: 0px; margin: 0px; inset: 0px; position: fixed; width: 100vw; height: 100vh; background: transparent; pointer-events: none;"></div></body></html>
