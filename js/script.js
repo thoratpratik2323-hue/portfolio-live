@@ -79,7 +79,8 @@ const texts = [
     "Writing clean code...",
     "Debugging reality...",
     "Learning new stacks...",
-    "Building cool stuff..."
+    "Building AI Agents...",
+    "Creating experiences..."
 ];
 let textIndex = 0;
 let charIndex = 0;
@@ -212,7 +213,7 @@ if (canvas) {
 
     for (let i = 0; i < particlesCount * 3; i++) {
         // Spread particles wider
-        posArray[i] = (Math.random() - 0.5) * 25; 
+        posArray[i] = (Math.random() - 0.5) * 25;
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
@@ -220,7 +221,7 @@ if (canvas) {
     // Vivid cyan/blue color for better visibility against dark background
     const material = new THREE.PointsMaterial({
         size: 0.03, // Increased size
-        color: 0x00f3ff, 
+        color: 0x00f3ff,
         transparent: true,
         opacity: 0.8,
     });
@@ -241,14 +242,55 @@ if (canvas) {
 
     const clock = new THREE.Clock();
 
+    // Create lines geometry
+    const linesMaterial = new THREE.LineBasicMaterial({
+        color: 0x00f3ff,
+        transparent: true,
+        opacity: 0.15
+    });
+    const linesGeometry = new THREE.BufferGeometry();
+    const linesMesh = new THREE.LineSegments(linesGeometry, linesMaterial);
+    scene.add(linesMesh);
+
     function animateParticles() {
-        const elapsedTime = clock.getElapsedTime();
-        // Slower, smoother rotation
-        particlesMesh.rotation.y = elapsedTime * 0.05;
-        
-        // Interactive tilt
-        particlesMesh.rotation.x += (mouseY * 0.05 - particlesMesh.rotation.x) * 0.1;
-        particlesMesh.rotation.y += (mouseX * 0.05) * 0.1;
+        // Rotate particles
+        particlesMesh.rotation.y += 0.001;
+        particlesMesh.rotation.x += 0.001;
+        linesMesh.rotation.y += 0.001;
+        linesMesh.rotation.x += 0.001;
+
+        // Interaction
+        particlesMesh.rotation.x += (mouseY * 0.05 - particlesMesh.rotation.x) * 0.05;
+        particlesMesh.rotation.y += (mouseX * 0.05) * 0.05;
+        linesMesh.rotation.x += (mouseY * 0.05 - linesMesh.rotation.x) * 0.05;
+        linesMesh.rotation.y += (mouseX * 0.05) * 0.05;
+
+        // Update lines
+        const positions = particlesMesh.geometry.attributes.position.array;
+        const linePositions = [];
+
+        // Optimize: Only check a subset of particles for lines to keep performance high
+        const particlesToCheck = isMobile ? 100 : 300;
+
+        for (let i = 0; i < particlesToCheck; i++) {
+            const x1 = positions[i * 3];
+            const y1 = positions[i * 3 + 1];
+            const z1 = positions[i * 3 + 2];
+
+            for (let j = i + 1; j < particlesToCheck; j++) {
+                const x2 = positions[j * 3];
+                const y2 = positions[j * 3 + 1];
+                const z2 = positions[j * 3 + 2];
+
+                const dist = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2);
+
+                if (dist < 3) { // Connection distance
+                    linePositions.push(x1, y1, z1);
+                    linePositions.push(x2, y2, z2);
+                }
+            }
+        }
+        linesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
 
         renderer.render(scene, camera);
         requestAnimationFrame(animateParticles);
@@ -310,6 +352,19 @@ function initAnimations() {
                 opacity: 0,
                 duration: 0.6,
                 delay: i * 0.1
+            });
+        });
+
+        // Progress Bars interaction
+        gsap.utils.toArray('.progress-fill').forEach(bar => {
+            gsap.to(bar, {
+                scrollTrigger: {
+                    trigger: bar,
+                    start: 'top 90%',
+                },
+                width: bar.getAttribute('data-width') + '%',
+                duration: 1.5,
+                ease: 'power2.out'
             });
         });
     }
@@ -417,4 +472,28 @@ function showNotification(message, type = 'success') {
         notification.className = `notification ${type} show`;
         setTimeout(() => notification.classList.remove('show'), 5000);
     }
+}
+
+// Scroll to Top Logic
+const scrollToTopBtn = document.getElementById('scrollToTop');
+
+if (scrollToTopBtn) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+        if (typeof lenis !== 'undefined') {
+            lenis.scrollTo(0);
+        } else {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    });
 }
