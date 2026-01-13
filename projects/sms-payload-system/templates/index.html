@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS PAYLOAD SYSTEM // v5.0 ULTIMATE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        :root {
+            /* Default: MATRIX (Green) */
+            --bg-color: #020202;
+            --panel-bg: rgba(5, 10, 5, 0.85);
+            --accent: #0f0;
+            --accent-dim: rgba(0, 255, 0, 0.1);
+            --secondary: #008F11;
+            --warn: #ff003c;
+            --text: #e0ffe0;
+            --font-main: 'Share Tech Mono', monospace;
+            --font-head: 'Orbitron', sans-serif;
+            --glow-spread: 15px;
+        }
+
+        /* Themes */
+        body.theme-red {
+            --panel-bg: rgba(15, 0, 0, 0.85);
+            --accent: #ff2a2a;
+            --accent-dim: rgba(255, 42, 42, 0.1);
+            --secondary: #800000;
+            --text: #ffe0e0;
+        }
+
+        body.theme-blue {
+            --panel-bg: rgba(0, 5, 15, 0.85);
+            --accent: #00f0ff;
+            --accent-dim: rgba(0, 240, 255, 0.1);
+            --secondary: #007799;
+            --text: #e0ffff;
+        }
+
+        body.theme-purple {
+            --panel-bg: rgba(10, 0, 15, 0.85);
+            --accent: #d800ff;
+            --accent-dim: rgba(216, 0, 255, 0.1);
+            --secondary: #8000aa;
+            --warn: #ffcc00;
+            --text: #fbe0ff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text);
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 20px 0;
+            /* Add vertical padding */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Center vertically if it fits */
+            min-height: 100vh;
+            /* Allow growing beyond 100vh */
+            overflow-y: auto;
+            /* Enable scrolling */
+            overflow-x: hidden;
+            perspective: 1200px;
+            transition: color 0.5s, background 0.5s;
+            box-sizing: border-box;
+        }
+
+        /* Background Effects */
+        #bg-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(circle at center, transparent 0%, var(--bg-color) 90%);
+        }
+
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .scan-line {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0.5;
+            box-shadow: 0 0 10px var(--accent);
+            animation: scan 3s linear infinite;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        @keyframes scan {
+            0% {
+                top: -5%;
+            }
+
+            100% {
+                top: 105%;
+            }
+        }
+
+        .container {
+            width: 1000px;
+            max-width: 95%;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+            transform-style: preserve-3d;
+        }
+
+        /* Sidebar & Panel Styles */
+        .glass-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--secondary);
+            backdrop-filter: blur(12px);
+            padding: 20px;
+            box-shadow: 0 0 var(--glow-spread) var(--accent-dim);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        /* Left Sidebar Controls */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sys-status {
+            font-size: 0.8em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .sys-val {
+            color: var(--accent);
+            font-weight: bold;
+            float: right;
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+            padding: 10px;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.3s;
+            font-family: var(--font-main);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theme-btn:hover,
+        .theme-btn.active {
+            background: var(--accent-dim);
+            color: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-dim);
+            padding-left: 15px;
+        }
+
+        .color-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* Main Interface */
+        .main-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .header h1 {
+            font-family: var(--font-head);
+            font-size: 2.5em;
+            margin: 0;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        .header small {
+            color: var(--warn);
+            letter-spacing: 3px;
+            font-weight: bold;
+            font-size: 0.7em;
+        }
+
+        /* Inputs */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group label {
+            position: absolute;
+            top: -8px;
+            left: 10px;
+            background: #000;
+            padding: 0 5px;
+            font-size: 0.7em;
+            color: var(--accent);
+            z-index: 2;
+        }
+
+        input,
+        select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--secondary);
+            color: var(--text);
+            padding: 12px;
+            font-family: var(--font-main);
+            font-size: 1em;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-dim);
+        }
+
+        /* Buttons */
+        .action-bar {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 10px;
+        }
+
+        .btn-main {
+            background: var(--secondary);
+            color: #000;
+            border: none;
+            font-weight: bold;
+            font-family: var(--font-head);
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: 0.3s;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+
+        .btn-main:hover:not(:disabled) {
+            background: var(--accent);
+            box-shadow: 0 0 20px var(--accent);
+            text-shadow: 0 0 5px #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-main:disabled {
+            background: #333;
+            color: #555;
+            cursor: not-allowed;
+        }
+
+        .btn-kill {
+            background: transparent;
+            border: 1px solid var(--warn);
+            color: var(--warn);
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: var(--font-head);
+        }
+
+        .btn-kill:hover {
+            background: var(--warn);
+            color: #000;
+            box-shadow: 0 0 15px var(--warn);
+        }
+
+
+        /* Terminal */
+        .terminal-window {
+            height: 250px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--secondary);
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 0.9em;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .log-entry {
+            margin: 2px 0;
+            padding-left: 10px;
+            border-left: 2px solid transparent;
+            animation: fadein 0.2s;
+        }
+
+        .log-info {
+            border-color: var(--secondary);
+        }
+
+        .log-success {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .log-warn {
+            border-color: var(--warn);
+            color: var(--warn);
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+                transform: translateX(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(0);
+            }
+        }
+
+        /* Progress */
+        .progress-cnt {
+            height: 4px;
+            background: #222;
+            margin-top: 5px;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.3s;
+            box-shadow: 0 0 10px var(--accent);
+        }
+    </style>
+</head>
+
+<body class="theme-green">
+
+    <canvas id="matrix-bg"></canvas>
+    <div id="bg-layer"></div>
+    <div class="scan-line"></div>
+
+    <div class="container" id="tilt-box">
+
+        <!-- Sidebar -->
+        <div class="glass-panel sidebar">
+            <div style="text-align:center; margin-bottom:10px; font-weight:bold; color:var(--accent);">
+                SYSTEM CONTROL
+            </div>
+
+            <div class="sys-status">
+                <div>CPU <span class="sys-val" id="cpu-val">12%</span></div>
+                <div>RAM <span class="sys-val" id="ram-val">4.1GB</span></div>
+                <div>UPTIME <span class="sys-val">04:20:00</span></div>
+                <div style="margin-top:5px; border-top:1px solid #333; padding-top:5px;">
+                    STATUS <span class="sys-val" id="status-val">IDLE</span>
+                </div>
+            </div>
+
+            <div style="font-size:0.7em; color:#666; margin-bottom:5px;">VISUAL THEME</div>
+            <button class="theme-btn active" onclick="setTheme('theme-green', '#0f0')">
+                <span class="color-dot" style="background:#0f0"></span> MATRIX
+            </button>
+            <button class="theme-btn" onclick="setTheme('theme-red', '#ff2a2a')">
+                <span class="color-dot" style="background:#ff2a2a"></span> SITH
+            </button>
+            <button class="theme-btn" onclick="setTheme('theme-blue', '#00f0ff')">
+                <span class="color-dot" style="background:#00f0ff"></span> TRON
+            </button>
+            <button class="theme-btn" onclick="setTheme('theme-purple', '#d800ff')">
+                <span class="color-dot" style="background:#d800ff"></span> SYNTH
+            </button>
+
+            <div style="margin-top:auto">
+                <button class="theme-btn" onclick="toggleAudio()" id="audio-btn">
+                    🔊 AUDIO: ON
+                </button>
+            </div>
+        </div>
+
+        <!-- Main -->
+        <div class="main-col">
+            <div class="glass-panel">
+                <div class="header">
+                    <h1>SMS PAYLOAD <span style="font-size:0.5em; vertical-align:middle; opacity:0.5;">v5.0</span></h1>
+                    <small>/// UNAUTHORIZED ACCESS IS PROHIBITED ///</small>
+                </div>
+
+                <form id="attackForm">
+                    <div class="form-grid">
+                        <div class="input-group full-width">
+                            <label>TARGET IDENTIFIER</label>
+                            <input type="text" name="mobile" placeholder="9XXXXXXXXX" required pattern="\d{10}"
+                                autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                            <label>PAYLOAD COUNT</label>
+                            <input type="number" name="count" value="10" min="1" max="100">
+                        </div>
+                        <div class="input-group">
+                            <label>INJECTION SPEED</label>
+                            <select name="speed">
+                                <option value="fast">MAXIMUM OVERDRIVE</option>
+                                <option value="medium">STEALTH MODE</option>
+                                <option value="slow">LOW PROFILE</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="action-bar">
+                        <button type="submit" class="btn-main" id="startBtn">INITIATE SEQUENCE</button>
+                        <button type="button" class="btn-kill" id="killBtn" disabled
+                            onclick="abortAttack()">ABORT</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="glass-panel" style="flex:1; display:flex; flex-direction:column;">
+                <div
+                    style="display:flex; justify-content:space-between; margin-bottom:5px; font-size:0.8em; color:var(--secondary);">
+                    <span>>_ TERMINAL OUTPUT</span>
+                    <span id="prog-text">Ready.</span>
+                </div>
+                <div class="terminal-window" id="term">
+                    <div class="log-entry log-info">System initialized...</div>
+                    <div class="log-entry log-info">Waiting for input...</div>
+                </div>
+                <div class="progress-cnt">
+                    <div class="progress-bar" id="p-bar"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- Visuals & Theme ---
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        let matrixColor = '#0F0';
+        let audioEnabled = true;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = '01XYZ';
+        const drops = Array(Math.floor(canvas.width / 20)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = matrixColor;
+            ctx.font = '15px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * 20, drops[i] * 20);
+                if (drops[i] * 20 > canvas.height && Math.random() > 0.98) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 50);
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight });
+
+        function setTheme(themeClass, color) {
+            document.body.className = themeClass;
+            matrixColor = color;
+            document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            playSound(600, 'sine', 0.1);
+        }
+
+        // --- 3D Tilt ---
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 60;
+            const y = (window.innerHeight / 2 - e.pageY) / 60;
+            document.getElementById('tilt-box').style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+        });
+
+        // --- Audio ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(freq, type, dur) {
+            if (!audioEnabled) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.frequency.value = freq;
+            osc.type = type;
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+            osc.stop(audioCtx.currentTime + dur);
+        }
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            document.getElementById('audio-btn').innerText = audioEnabled ? "🔊 AUDIO: ON" : "🔇 AUDIO: OFF";
+        }
+
+        // --- Fake Stats ---
+        setInterval(() => {
+            document.getElementById('cpu-val').innerText = Math.floor(Math.random() * 30 + 10) + "%";
+            document.getElementById('ram-val').innerText = (Math.random() * 0.5 + 4.0).toFixed(1) + "GB";
+        }, 1000);
+
+        // --- Logic ---
+        const form = document.getElementById('attackForm');
+        const startBtn = document.getElementById('startBtn');
+        const killBtn = document.getElementById('killBtn');
+        const term = document.getElementById('term');
+        const pBar = document.getElementById('p-bar');
+        const statusVal = document.getElementById('status-val');
+        const progText = document.getElementById('prog-text');
+        let controller = null;
+
+        function log(msg, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `log-entry log-${type}`;
+            div.innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            term.appendChild(div);
+            term.scrollTop = term.scrollHeight;
+            if (type === 'info') playSound(800, 'sine', 0.03);
+            if (type === 'success') playSound(1200, 'square', 0.1);
+            if (type === 'warn') playSound(150, 'sawtooth', 0.2);
+        }
+
+        function abortAttack() {
+            if (controller) {
+                controller.abort();
+                controller = null;
+                log("MANUAL OVERRIDE: SEQUENCE ABORTED", "warn");
+                endState(false);
+            }
+        }
+
+        function endState(success) {
+            startBtn.disabled = false;
+            killBtn.disabled = true;
+            startBtn.innerText = "INITIATE SEQUENCE";
+            statusVal.innerText = "IDLE";
+            statusVal.style.color = "var(--accent)";
+            if (success) playSound(600, 'square', 0.5); // Victory sound
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            startBtn.disabled = true;
+            killBtn.disabled = false;
+            startBtn.innerText = "RUNNING...";
+            statusVal.innerText = "BUSY";
+            statusVal.style.color = "var(--warn)";
+            term.innerHTML = "";
+            pBar.style.width = "0%";
+
+            controller = new AbortController();
+            const signal = controller.signal;
+
+            try {
+                log("Initializing connection...", "info");
+                const response = await fetch('/api/bomb', {
+                    method: 'POST',
+                    body: new FormData(form),
+                    signal: signal
+                });
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n\n');
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            try {
+                                handleData(JSON.parse(line.substring(6)));
+                            } catch (err) { }
+                        }
+                    }
+                }
+                endState(true);
+
+            } catch (err) {
+                if (err.name === 'AbortError') {
+                    // Handled in abort function
+                } else {
+                    log("CONNECTION LOST: " + err, "warn");
+                    endState(false);
+                }
+            }
+        });
+
+        function handleData(data) {
+            if (data.type === 'progress') {
+                const pct = (data.current / data.total) * 100;
+                pBar.style.width = pct + "%";
+                progText.innerText = `Packet ${data.current} / ${data.total}`;
+            } else if (data.type === 'finish') {
+                log(data.message, data.failed > 0 ? 'warn' : 'success');
+            } else {
+                log(data.message, data.type.replace('log_', ''));
+            }
+        }
+
+    </script>
+</body>
+
+</html>
