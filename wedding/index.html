@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>शुभ विवाह | Wedding Invitation</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Sans+Devanagari:wght@400;700&family=Tiro+Devanagari+Marathi&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Floating Petals Canvas -->
+    <canvas id="petals"></canvas>
+
+    <!-- Music Control -->
+    <button id="music-btn" onclick="toggleMusic()"><i class="fas fa-music"></i></button>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="ganesha">|| श्री गणेशाय नमः ||<br>|| श्री चैतन्य कानिफनाथ प्रसन्न ||</div>
+            <h1 class="main-title">सस्नेह निमंत्रण</h1>
+
+            <div id="guest-welcome" class="guest-box">
+                <!-- Guest Name Injected Here -->
+            </div>
+
+            <div class="couple-section">
+                <div class="person">
+                    <h2 class="name">चि. सौ. कां. स्वप्नाली <span class="degree">(B.E. E&TC)</span></h2>
+                    <p class="parents">सौ. भारती व श्री. बाळासाहेब मारुती पा. थोरात<br>रा. उक्कलगाव ता. श्रीरामपूर जि.
+                        अ.नगर<br>यांची सुकन्या</p>
+                </div>
+
+                <div class="divider"><img src="https://pngimg.com/uploads/wedding/wedding_PNG19484.png" alt="Weds"
+                        style="width:50px; opacity:0.8;"></div>
+
+                <div class="person">
+                    <h2 class="name">चि. हितेश <span class="degree">(B.E. Ele.)</span></h2>
+                    <p class="parents">सौ. संगिता व श्री. शेखर अनंता पा. कोल्हे<br>मु.पो. कुर्ला कॅम्प, उल्हासनगर ४, जि.
+                        ठाणे<br>यांचे चिरंजीव</p>
+                </div>
+            </div>
+
+            <div class="date-box">
+                <p>शुभ विवाह मुहूर्त</p>
+                <h2>शुक्रवार दि. ०६ फेब्रुवारी २०२६</h2>
+                <p>दुपारी ११:५४ वा.</p>
+            </div>
+        </header>
+
+        <!-- Events Section -->
+        <section class="events">
+            <h2 class="section-title">मंगल कार्यक्रम</h2>
+            <div class="timeline">
+                <div class="event-card left">
+                    <div class="content">
+                        <h3><i class="fas fa-hand-sparkles"></i> साखरपुडा व हळदी समारंभ</h3>
+                        <p>गुरुवार दि. ०५ फेब्रुवारी २०२६</p>
+                        <p>सायं. ५:०० वाजता</p>
+                    </div>
+                </div>
+                <div class="event-card center">
+                    <div class="content main-event">
+                        <h3><i class="fas fa-rings-wedding"></i> शुभ विवाह सोहळा</h3>
+                        <p>शुक्रवार दि. ०६ फेब्रुवारी २०२६</p>
+                        <p>दुपारी ११:५४ वा.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="msg-box">
+                <p>सप्तपदीच्या प्रदक्षिणा, हळदी कुंकूवाचं लेण, नाजूक मोती,<br>
+                    अक्षदांचा सुखद वर्षाव आणि मणि मंगळसुत्राचं पावित्र्यं घेऊन<br>
+                    संपन्न होणाऱ्या वैवाहिक सोहळ्यास मनापासून अपेक्षा आहे<br>
+                    आपल्या उपस्थितीची आणि आशीर्वादाची.</p>
+            </div>
+        </section>
+
+        <!-- Venue Section -->
+        <section class="venue">
+            <h2 class="section-title">विवाह स्थळ</h2>
+            <h3 style="color:#800000; font-weight:bold;">पंकज लॉन्स</h3>
+            <p>कोल्हेवाडी फाटा, समनापूर, ता. संगमनेर जि. अहमदनगर</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Pankaj+Lawns+Sangamner" target="_blank"
+                class="map-btn">
+                <i class="fas fa-map-marker-alt"></i> गुगल मॅप वर पहा
+            </a>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="inviter">
+                <h3>आग्रहाचे निमंत्रण</h3>
+                <h2 style="color:#d4af37;">समस्त थोरात पाटील परिवार</h2>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
