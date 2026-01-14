@@ -39,11 +39,21 @@
         </button>
     </div>
 
+    <!-- Dark Mode Toggle -->
+    <button id="theme-toggle" onclick="toggleTheme()"
+        style="position:fixed; bottom:80px; right:20px; background:#222; color:#d4af37; border:1px solid #d4af37; width:50px; height:50px; border-radius:50%; z-index:100; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,0.3);">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <div class="container">
         <!-- Hero Section -->
         <header class="hero">
+            <div class="shloka" style="font-size: 1.2rem; color: #800000; font-weight: bold; margin-bottom: 15px;">
+                || वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ||<br>
+                || निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ||
+            </div>
             <div class="ganesha">|| श्री गणेशाय नमः ||<br>|| श्री चैतन्य कानिफनाथ प्रसन्न ||</div>
-            <h1 class="main-title">सस्नेह निमंत्रण</h1>
+            <h1 class="main-title typing-effect">सस्नेह निमंत्रण</h1>
 
             <div id="guest-welcome" class="guest-box">
                 <!-- Guest Name Injected Here -->
@@ -70,6 +80,11 @@
                 <p>शुभ विवाह मुहूर्त</p>
                 <h2>शुक्रवार दि. ०६ फेब्रुवारी २०२६</h2>
                 <p>दुपारी ११:५४ वा.</p>
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Swapnali+Weds+Hitesh&dates=20260206T062400Z/20260206T092400Z&details=Wedding+Ceremony+of+Swapnali+and+Hitesh&location=Pankaj+Lawns,+Sangamner"
+                    target="_blank"
+                    style="color:white; text-decoration:underline; font-size:0.9rem; display:block; margin-top:5px;">
+                    <i class="far fa-calendar-alt"></i> Save the Date
+                </a>
             </div>
 
             <!-- Countdown Timer -->
@@ -104,7 +119,7 @@
         </header>
 
         <!-- Events Section -->
-        <section class="events">
+        <section class="events reveal-on-scroll">
             <h2 class="section-title">मंगल कार्यक्रम</h2>
             <div class="timeline">
                 <div class="event-card left">
@@ -132,7 +147,7 @@
         </section>
 
         <!-- Venue Section -->
-        <section class="venue">
+        <section class="venue reveal-on-scroll">
             <h2 class="section-title">विवाह स्थळ</h2>
             <h3 style="color:#800000; font-weight:bold;">पंकज लॉन्स</h3>
             <p>कोल्हेवाडी फाटा, समनापूर, ता. संगमनेर जि. अहमदनगर</p>
@@ -143,7 +158,7 @@
         </section>
 
         <!-- Photo Gallery -->
-        <section class="gallery" style="text-align:center; padding: 40px 0;">
+        <section class="gallery reveal-on-scroll" style="text-align:center; padding: 40px 0;">
             <h2 class="section-title">शुभ क्षण</h2>
             <div class="gallery-grid" style="display:flex; justify-content:center; flex-wrap:wrap; gap:20px;">
                 <div class="photo-card">
@@ -156,6 +171,48 @@
                 </div>
             </div>
             <h3 style="color:#800000; margin-top:15px; font-size:2rem;">|| वर - वधू ||</h3>
+        </section>
+
+        <!-- New Sections: Family, Dress Code, Wishes -->
+        <section class="more-details reveal-on-scroll" style="text-align:center; margin-top:40px;">
+
+            <!-- Family -->
+            <div class="family-section" style="margin-bottom:40px;">
+                <h2 class="section-title">आपले स्नेही</h2>
+                <div style="background:linear-gradient(to right, transparent, #fff8e1, transparent); padding:20px;">
+                    <p style="font-size:1.1rem; color:#800000;"><b>मामा - मावशी परिवार</b><br>तसेच</p>
+                    <p style="font-size:1.1rem; color:#800000;"><b>काका - आत्या परिवार</b></p>
+                    <p style="color:#555;">आणि समस्त मित्र परिवार</p>
+                </div>
+            </div>
+
+            <!-- Dress Code -->
+            <div class="dress-code" style="margin-bottom:40px;">
+                <h2 class="section-title">Dress Code</h2>
+                <p style="font-size:1.2rem;"><span style="font-size:1.5rem;">👰🤵</span> Traditional Marathi</p>
+                <small style="color:#666;">(पारंपारिक वेशभूषा)</small>
+            </div>
+
+            <!-- Wishes -->
+            <div class="wishes-section"
+                style="background:#fff5f5; padding:30px; border-radius:15px; border:1px dashed #d4af37; max-width:500px; margin:0 auto;">
+                <h2 class="section-title">शुभेच्छा द्या</h2>
+                <textarea id="wish-text" placeholder="तुमचा आशीर्वाद इथे लिहा..." rows="3"
+                    style="width:80%; padding:10px; border-radius:5px; border:1px solid #ccc; margin-bottom:10px; font-family:inherit;"></textarea><br>
+                <button onclick="sendWish()"
+                    style="padding:10px 20px; background:#25D366; color:white; border:none; border-radius:5px; cursor:pointer; font-weight:bold;">
+                    <i class="fab fa-whatsapp"></i> पाठवा
+                </button>
+            </div>
+
+            <!-- Share Button -->
+            <div class="share-section" style="margin-top:40px;">
+                <a href="https://wa.me/?text=सस्नेह%20निमंत्रण!%0Aचि.%20हितेश%20आणि%20चि.%20सौ.%20कां.%20स्वप्नाली%20यांच्या%20विवाह%20सोहळ्यास%20आपण%20येथे%20निमंत्रित%20आहात:%0Ahttps://thoratpratik2323-hue.github.io/portfolio-live/wedding/index.html"
+                    target="_blank" class="map-btn" style="background:#25D366; border-color:#25D366;">
+                    <i class="fab fa-whatsapp"></i> पत्रिका शेअर करा
+                </a>
+            </div>
+
         </section>
 
         <!-- Footer -->

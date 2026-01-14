@@ -32,7 +32,10 @@ class Petal {
         this.speedX = Math.random() * 2 - 1;
         this.rotation = Math.random() * 360;
         this.spin = Math.random() * 2 - 1;
-        this.color = `rgba(255, ${Math.floor(Math.random() * 100) + 100}, 100, 0.6)`; // Red/Pink shades
+        // Marigold Colors (Orange/Yellow mix)
+        const colors = ['255, 165, 0', '255, 215, 0', '255, 69, 0'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        this.color = `rgba(${randomColor}, 0.7)`;
     }
 
     update() {
@@ -118,7 +121,6 @@ style.innerHTML = `
 document.head.appendChild(style);
 
 // Countdown Timer
-// Countdown Timer
 function updateTimer() {
     const weddingDate = new Date('2026-02-06T11:54:00').getTime();
     const now = new Date().getTime();
@@ -145,3 +147,46 @@ function updateTimer() {
 }
 setInterval(updateTimer, 1000);
 updateTimer();
+
+// 1. Dark Mode Toggle
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    const btn = document.getElementById('theme-toggle');
+    const isDark = document.body.classList.contains('dark-mode');
+
+    // Change Icon
+    btn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+    // Optional: Save preference
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+}
+
+// Check Saved Theme
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    document.getElementById('theme-toggle').innerHTML = '<i class="fas fa-sun"></i>';
+}
+
+// 2. Wishes Function
+function sendWish() {
+    const text = document.getElementById('wish-text').value;
+    if (text.trim() === "") {
+        alert("कृपया काहीतरी लिहा!");
+        return;
+    }
+    const message = encodeURIComponent(`शुभेच्छा: ${text}`);
+    window.open(`https://wa.me/?text=${message}`, '_blank');
+}
+
+// 3. Reveal on Scroll (Intersection Observer)
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+    observer.observe(el);
+});

@@ -311,6 +311,116 @@ footer {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
+/* Reveal Animation */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
+}
+
+.reveal-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Typing Effect */
+.typing-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid var(--gold);
+    animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+
+    to {
+        width: 100%
+    }
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: var(--gold)
+    }
+}
+
+/* Responsive fixes */
+@media (max-width: 600px) {
+    .typing-effect {
+        font-size: 2.5rem;
+        /* Smaller font on mobile */
+        white-space: normal;
+        /* Allow wrap if too long */
+        border-right: none;
+        /* Remove cursor on mobile wrap */
+        animation: fadeIn 2s ease;
+        /* Fallback animation */
+    }
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --bg-color: #1a0505;
+    /* Deep dark maroon/black */
+    --text-color: #ffd700;
+    --primary-color: #ffcccc;
+}
+
+body.dark-mode .container {
+    background: rgba(0, 0, 0, 0.85);
+    /* Dark Glass */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    border-image: linear-gradient(135deg, #BF953F, #725619, #FBF5B7, #725619) 1;
+}
+
+body.dark-mode .event-card,
+body.dark-mode .venue,
+body.dark-mode .wishes-section {
+    background: #2a0a0a;
+    border-color: #d4af37;
+    color: #fff;
+}
+
+body.dark-mode .main-event {
+    background: #3d0000;
+}
+
+body.dark-mode footer {
+    background: #111;
+}
+
+body.dark-mode .timer-box {
+    background: #400000;
+    border-color: #ffd700;
+}
+
+body.dark-mode .guest-box {
+    background: #330000;
+    color: #cca300;
+}
+
+body.dark-mode #music-btn,
+body.dark-mode #theme-toggle {
+    background: #400000;
+    border: 1px solid #ffd700;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 /* Petals Canvas */
 #petals {
     position: fixed;
