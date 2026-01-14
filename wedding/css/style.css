@@ -105,6 +105,7 @@ body::before {
     color: #b8860b;
     background: var(--gold-gradient);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% auto;
     animation: goldShine 3s linear infinite;
@@ -328,10 +329,53 @@ footer {
     overflow: hidden;
     white-space: nowrap;
     border-right: 3px solid var(--gold);
-    animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+    animation: typing 3s steps(40, end), blink-caret .75s step-end infinite, goldShine 6s linear infinite;
     max-width: fit-content;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* Floating Diyas */
+.diya {
+    position: fixed;
+    color: #ffaa00;
+    font-size: 1.5rem;
+    pointer-events: none;
+    z-index: -1;
+    filter: drop-shadow(0 0 8px #ffcc00);
+    animation: floatDiya 10s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+@keyframes floatDiya {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(15deg);
+        opacity: 1;
+    }
+}
+
+/* Shloka Animation */
+.shloka {
+    animation: fadeInDown 2s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes typing {
