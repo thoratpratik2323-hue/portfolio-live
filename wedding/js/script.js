@@ -118,8 +118,9 @@ style.innerHTML = `
 document.head.appendChild(style);
 
 // Countdown Timer
+// Countdown Timer
 function updateTimer() {
-    const weddingDate = new Date('February 6, 2026 11:54:00').getTime();
+    const weddingDate = new Date('2026-02-06T11:54:00').getTime();
     const now = new Date().getTime();
     const gap = weddingDate - now;
 
@@ -133,10 +134,14 @@ function updateTimer() {
     const minutes = Math.floor((gap % hour) / minute);
     const seconds = Math.floor((gap % minute) / second);
 
-    document.getElementById('days').innerText = days;
-    document.getElementById('hours').innerText = hours;
-    document.getElementById('minutes').innerText = minutes;
-    document.getElementById('seconds').innerText = seconds;
+    if (gap < 0) {
+        document.getElementById('countdown').innerHTML = "<h3>शिभे विवाह संपन्न!</h3>";
+    } else {
+        document.getElementById('days').innerText = days;
+        document.getElementById('hours').innerText = hours;
+        document.getElementById('minutes').innerText = minutes;
+        document.getElementById('seconds').innerText = seconds;
+    }
 }
 setInterval(updateTimer, 1000);
 updateTimer();
