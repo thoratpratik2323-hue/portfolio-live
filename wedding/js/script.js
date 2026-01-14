@@ -79,8 +79,8 @@ function animate() {
 
 animate();
 
-// Music Toggle
 let isPlaying = false;
+let musicTimeout; // To handle auto-stop
 const music = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
 
@@ -95,6 +95,16 @@ function startExperience() {
     music.play().then(() => {
         isPlaying = true;
         musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+
+        // Auto-stop after 1 minute (60000ms)
+        musicTimeout = setTimeout(() => {
+            if (isPlaying) {
+                music.pause();
+                isPlaying = false;
+                musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+                console.log("Music auto-stopped after 1 minute");
+            }
+        }, 60000);
     }).catch(e => {
         console.log("Autoplay blocked, user must interact manually");
     });
@@ -104,6 +114,7 @@ function toggleMusic() {
     if (isPlaying) {
         music.pause();
         musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+        if (musicTimeout) clearTimeout(musicTimeout); // Cancel auto-stop if user manually pauses
     } else {
         music.play();
         musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
