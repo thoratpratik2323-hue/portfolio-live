@@ -1,16 +1,33 @@
-// Guest Name Logic
-document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const guestName = params.get('guest');
-    const guestBox = document.getElementById('guest-welcome');
+// Smart Guest Experience & Greetings
+async function initGreetings() {
+    const greetingEl = document.getElementById('time-greeting');
+    if (!greetingEl) return;
 
-    if (guestName) {
-        // Replace underscores with spaces for cleaner names
-        const cleanName = guestName.replace(/_/g, ' ');
-        guestBox.innerHTML = `<h3>सहर्ष स्वागत, ${cleanName}</h3>`;
-        guestBox.style.display = 'block';
+    // 1. Time-based Greeting
+    const hour = new Date().getHours();
+    let timeGreeting = "नमस्ते";
+    if (hour >= 5 && hour < 12) timeGreeting = "शुभ सकाळ";
+    else if (hour >= 12 && hour < 17) timeGreeting = "शुभ दुपार";
+    else if (hour >= 17 && hour < 21) timeGreeting = "शुभ संध्या";
+    else timeGreeting = "शुभ रात्री";
+
+    // 2. City Detection
+    let cityMsg = "";
+    try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        if (data.city) {
+            cityMsg = `<br><small style="color:#d4af37">"${data.city} हून येणाऱ्या आपल्यासाठी विशेष शुभेच्छा!"</small>`;
+        }
+    } catch (e) {
+        console.log("City detection failed");
     }
-});
+
+    greetingEl.innerHTML = `<h3>${timeGreeting}</h3>${cityMsg}`;
+    greetingEl.style.display = 'block';
+}
+
+document.addEventListener('DOMContentLoaded', initGreetings);
 
 // Petal Animation
 const canvas = document.getElementById('petals');
@@ -79,6 +96,76 @@ function animate() {
 
 animate();
 
+// Akshata Shower Logic
+const akshataCanvas = document.getElementById('akshata');
+const aCtx = akshataCanvas.getContext('2d');
+akshataCanvas.width = window.innerWidth;
+akshataCanvas.height = window.innerHeight;
+
+const akshataParticles = [];
+let isAkshataActive = false;
+
+class Akshata {
+    constructor() {
+        this.reset();
+    }
+    reset() {
+        this.x = Math.random() * akshataCanvas.width;
+        this.y = -20;
+        this.size = Math.random() * 4 + 2;
+        this.speedY = Math.random() * 3 + 2;
+        this.speedX = Math.random() * 2 - 1;
+        this.rotation = Math.random() * 360;
+    }
+    update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.rotation += 5;
+        if (this.y > akshataCanvas.height) this.reset();
+    }
+    draw() {
+        aCtx.save();
+        aCtx.translate(this.x, this.y);
+        aCtx.rotate(this.rotation * Math.PI / 180);
+        aCtx.fillStyle = '#fff9e6'; // Rice color
+        aCtx.shadowBlur = 5;
+        aCtx.shadowColor = 'gold';
+        aCtx.beginPath();
+        aCtx.ellipse(0, 0, this.size, this.size / 3, 0, 0, Math.PI * 2);
+        aCtx.fill();
+        aCtx.restore();
+    }
+}
+
+function initAkshata() {
+    for (let i = 0; i < 100; i++) akshataParticles.push(new Akshata());
+}
+
+function animateAkshata() {
+    if (!isAkshataActive) return;
+    aCtx.clearRect(0, 0, akshataCanvas.width, akshataCanvas.height);
+    akshataParticles.forEach(p => {
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animateAkshata);
+}
+
+const akshataObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            isAkshataActive = true;
+            if (akshataParticles.length === 0) initAkshata();
+            animateAkshata();
+            setTimeout(() => { isAkshataActive = false; }, 5000); // Stop after 5s
+        }
+    });
+}, { threshold: 0.5 });
+
+// Target high-level "Shubh Vivah" mention
+const shubhVivahSection = document.querySelector('.main-event');
+if (shubhVivahSection) akshataObserver.observe(shubhVivahSection);
+
 let isPlaying = false;
 let musicTimeout; // To handle auto-stop
 const music = document.getElementById('bg-music');
@@ -90,6 +177,17 @@ function startExperience() {
 
     // Trigger animation
     envelope.classList.add('opened');
+
+    // Hide wax seal and show shubharambh if needed (or just proceed)
+    const seal = document.getElementById('wax-seal');
+    if (seal) seal.style.display = 'none';
+
+    // Kalash Entry
+    const kalash = document.getElementById('kalash-container');
+    if (kalash) {
+        kalash.style.display = 'block';
+        setTimeout(() => { kalash.style.left = '20px'; }, 100);
+    }
 
     // Music and Voice start after flap opens
     setTimeout(() => {
@@ -119,14 +217,25 @@ function startExperience() {
         wrapper.style.animation = 'fadeOut 1s forwards';
         setTimeout(() => {
             wrapper.style.display = 'none';
+            // Auto Scroll Experience
+            autoScrollDown();
         }, 1000);
     }, 1500); // Wait for flap animation
+}
+
+function autoScrollDown() {
+    setTimeout(() => {
+        window.scrollBy({
+            top: 500,
+            behavior: 'smooth'
+        });
+    }, 1000);
 }
 
 function speakWelcome() {
     if ('speechSynthesis' in window) {
         const msg = new SpeechSynthesisUtterance();
-        msg.text = "सस्नेह निमंत्रण";
+        msg.text = "आपलं हार्दिक स्वागत आहे";
         msg.lang = 'mr-IN';
         msg.rate = 0.9;
         msg.pitch = 1.1;
@@ -218,3 +327,67 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
     observer.observe(el);
 });
+
+// 4. Gesture Based Controls (Swipe)
+let touchstartX = 0;
+let touchendX = 0;
+
+function checkDirection() {
+    const threshold = 100;
+    if (touchendX < touchstartX - threshold) {
+        // Swipe Left -> Gallery
+        document.querySelector('.gallery').scrollIntoView({ behavior: 'smooth' });
+    }
+    if (touchendX > touchstartX + threshold) {
+        // Swipe Right -> Events
+        document.querySelector('.events').scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+document.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX;
+    checkDirection();
+});
+
+// 5. Return Gift Reveal
+function revealGift() {
+    const img = document.getElementById('gift-img');
+    const overlay = document.getElementById('gift-overlay');
+    const status = document.getElementById('gift-status');
+
+    if (img) img.style.filter = 'none';
+    if (overlay) overlay.style.opacity = '0';
+    setTimeout(() => {
+        if (overlay) overlay.style.display = 'none';
+        if (status) status.style.display = 'block';
+    }, 1000);
+}
+
+// 6. Ganesh Camera Modal
+let stream = null;
+async function openGaneshCamera() {
+    const modal = document.getElementById('camera-modal');
+    const video = document.getElementById('webcam');
+    modal.style.display = 'block';
+
+    try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+        video.srcObject = stream;
+    } catch (err) {
+        alert("Camera access denied or not available");
+        modal.style.display = 'none';
+    }
+}
+
+function closeGaneshCamera() {
+    const modal = document.getElementById('camera-modal');
+    const video = document.getElementById('webcam');
+    modal.style.display = 'none';
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+    }
+}

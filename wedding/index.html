@@ -12,12 +12,15 @@
         href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Sans+Devanagari:wght@400;700&family=Tiro+Devanagari+Marathi&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css?v=6">
+    <link rel="stylesheet" href="css/style.css?v=20">
 </head>
 
 <body>
     <!-- Floating Petals Canvas -->
     <canvas id="petals"></canvas>
+    <!-- Akshata Shower Canvas -->
+    <canvas id="akshata"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:10; pointer-events:none;"></canvas>
 
     <!-- Floating Diyas -->
     <div class="diya" style="top: 15%; left: 8%;">🪔</div>
@@ -48,8 +51,19 @@
             <div id="wax-seal" onclick="startExperience()">
                 <div class="seal-emblem">S & H</div>
             </div>
+            <button id="shubharambh-btn" onclick="startExperience()"
+                style="display:none; position:absolute; bottom:20px; left:50%; transform:translateX(-50%); padding:10px 20px; background:var(--gold); color:#800000; border:none; border-radius:30px; font-weight:bold; cursor:pointer; box-shadow:0 0 15px gold; z-index:10;">शुभारंभ
+                <i class="fas fa-arrow-right"></i></button>
         </div>
         <p class="envelope-hint">पत्रावर क्लिक करावे</p>
+    </div>
+
+    <!-- Kalash Entry -->
+    <div id="kalash-container"
+        style="position:fixed; bottom:20px; left:-150px; z-index:1000; transition: left 1.5s ease-out; display:none;">
+        <img src="https://png.pngtree.com/png-vector/20230206/ourmid/pngtree-hindu-wedding-kalash-with-coconut-and-mango-leaves-vector-png-image_6584227.png"
+            alt="Kalash" style="width:120px;">
+        <div class="water-ripple"></div>
     </div>
 
     <!-- Dark Mode Toggle -->
@@ -61,16 +75,18 @@
     <div class="container">
         <!-- Hero Section -->
         <header class="hero">
+            <div class="top-ganesh" style="text-align:center; margin-bottom:20px;">
+                <img src="images/ganesh_overlay.png" alt="Ganpati"
+                    style="width:120px; filter: drop-shadow(0 0 10px gold);">
+            </div>
+            <div class="greetings-text" id="time-greeting"
+                style="font-size: 1.5rem; color: #800000; font-weight: bold; margin-bottom: 15px;"></div>
             <div class="shloka" style="font-size: 1.2rem; color: #800000; font-weight: bold; margin-bottom: 15px;">
                 || वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ||<br>
                 || निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ||
             </div>
             <div class="ganesha">|| श्री गणेशाय नमः ||<br>|| श्री चैतन्य कानिफनाथ प्रसन्न ||</div>
             <h1 class="main-title typing-effect">सस्नेह निमंत्रण</h1>
-
-            <div id="guest-welcome" class="guest-box">
-                <!-- Guest Name Injected Here -->
-            </div>
 
             <div class="couple-section">
                 <div class="person">
@@ -92,6 +108,14 @@
             <div class="date-box">
                 <p>शुभ विवाह मुहूर्त</p>
                 <h2>शुक्रवार दि. ०६ फेब्रुवारी २०२६</h2>
+                <div class="muhurat-clock-container">
+                    <div class="muhurat-clock">
+                        <div class="glow-sector"></div>
+                        <div class="hand hour"></div>
+                        <div class="hand minute"></div>
+                        <div class="center-dot"></div>
+                    </div>
+                </div>
                 <p>दुपारी ११:५४ वा.</p>
                 <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Swapnali+Weds+Hitesh&dates=20260206T062400Z/20260206T092400Z&details=Wedding+Ceremony+of+Swapnali+and+Hitesh&location=Pankaj+Lawns,+Sangamner"
                     target="_blank"
@@ -231,6 +255,31 @@
                 </a>
             </div>
 
+            <!-- Return Gift Preview -->
+            <div class="return-gift reveal-on-scroll" style="margin-top:50px; text-align:center;">
+                <h2 class="section-title">आपल्यासाठी खास आठवण</h2>
+                <div class="gift-container" onclick="revealGift()"
+                    style="position:relative; width:280px; margin:0 auto; cursor:pointer; overflow:hidden; border-radius:15px; border:3px solid var(--gold);">
+                    <img id="gift-img" src="images/return_gift.png" alt="Return Gift"
+                        style="width:100%; filter: blur(20px); transition: filter 1s ease;">
+                    <div id="gift-overlay"
+                        style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); display:flex; justify-content:center; align-items:center; color:white; flex-direction:column;">
+                        <i class="fas fa-gift" style="font-size:3rem; margin-bottom:10px; color:var(--gold);"></i>
+                        <p style="font-weight:bold;">पाहण्यासाठी स्पर्श करा</p>
+                    </div>
+                </div>
+                <p id="gift-status"
+                    style="margin-top:10px; color:var(--primary-color); font-weight:bold; display:none;">✨ आपल्या
+                    भेटीसाठी धन्यवाद! ✨</p>
+            </div>
+
+            <!-- Ganesh Camera Button -->
+            <div style="margin-top:30px;">
+                <button onclick="openGaneshCamera()" class="map-btn" style="background:#800000; border:2px solid gold;">
+                    <i class="fas fa-camera"></i> गणपती बाप्पा आशीर्वाद दर्शन
+                </button>
+            </div>
+
         </section>
 
         <!-- Digital Signature -->
@@ -249,7 +298,22 @@
         </footer>
     </div>
 
-    <script src="js/script.js"></script>
+    <!-- Camera Modal -->
+    <div id="camera-modal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:10000;">
+        <video id="webcam" autoplay playsinline style="width:100%; height:100%; object-fit:cover;"></video>
+        <div id="ganesh-overlay"
+            style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); pointer-events:none;">
+            <img id="overlay-ganesh-img" src="images/ganesh_overlay.png" alt="Ganesha"
+                style="width:200px; opacity:0.8; filter: drop-shadow(0 0 20px gold);">
+            <p style="color:gold; text-align:center; font-weight:bold; font-size:1.5rem; text-shadow:0 0 10px #000;">||
+                गणपती बाप्पा मोरया ||</p>
+        </div>
+        <button onclick="closeGaneshCamera()"
+            style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.3); border:none; color:white; font-size:2rem; border-radius:50%; width:50px; height:50px; cursor:pointer;">&times;</button>
+    </div>
+
+    <script src="js/script.js?v=20"></script>
 </body>
 
 </html>
