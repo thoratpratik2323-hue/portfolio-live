@@ -96,6 +96,9 @@ function startExperience() {
         isPlaying = true;
         musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
 
+        // Voice Welcome
+        speakWelcome();
+
         // Auto-stop after 1 minute (60000ms)
         musicTimeout = setTimeout(() => {
             if (isPlaying) {
@@ -108,6 +111,17 @@ function startExperience() {
     }).catch(e => {
         console.log("Autoplay blocked, user must interact manually");
     });
+}
+
+function speakWelcome() {
+    if ('speechSynthesis' in window) {
+        const msg = new SpeechSynthesisUtterance();
+        msg.text = "सस्नेह निमंत्रण";
+        msg.lang = 'mr-IN';
+        msg.rate = 0.9;
+        msg.pitch = 1.1;
+        window.speechSynthesis.speak(msg);
+    }
 }
 
 function toggleMusic() {

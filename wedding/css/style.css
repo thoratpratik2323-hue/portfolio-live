@@ -400,6 +400,30 @@ footer {
     }
 }
 
+/* Signature Animation */
+.signature-text {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    position: relative;
+}
+
+.signature-area.active .signature-text {
+    animation: drawSignature 4s ease-out forwards;
+}
+
+@keyframes drawSignature {
+    0% {
+        clip-path: inset(0 100% 0 0);
+    }
+
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
 /* Responsive fixes */
 @media (max-width: 600px) {
     .typing-effect {
