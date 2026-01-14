@@ -175,7 +175,7 @@ function sendWish() {
         return;
     }
     const message = encodeURIComponent(`शुभेच्छा: ${text}`);
-    window.open(`https://wa.me/?text=${message}`, '_blank');
+    window.open(`https://wa.me/919370433392?text=${message}`, '_blank');
 }
 
 // 3. Reveal on Scroll (Intersection Observer)
