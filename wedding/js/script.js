@@ -76,16 +76,42 @@ function animate() {
 
 animate();
 
-// Music Toggle (Placeholder)
+// Music Toggle
 let isPlaying = false;
-function toggleMusic() {
-    isPlaying = !isPlaying;
-    const btn = document.getElementById('music-btn');
-    if (isPlaying) {
-        btn.innerHTML = '<i class="fas fa-pause"></i>';
-        // music.play();
-    } else {
-        btn.innerHTML = '<i class="fas fa-music"></i>';
-        // music.pause();
-    }
+const music = document.getElementById('bg-music');
+const musicBtn = document.getElementById('music-btn');
+
+function startExperience() {
+    document.getElementById('start-overlay').style.animation = 'fadeOut 1s forwards';
+    setTimeout(() => {
+        document.getElementById('start-overlay').style.display = 'none';
+    }, 1000);
+
+    // Attempt to play music
+    music.play().then(() => {
+        isPlaying = true;
+        musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    }).catch(e => {
+        console.log("Autoplay blocked, user must interact manually");
+    });
 }
+
+function toggleMusic() {
+    if (isPlaying) {
+        music.pause();
+        musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+    } else {
+        music.play();
+        musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    }
+    isPlaying = !isPlaying;
+}
+
+// Add CSS for fadeOut
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+`;
+document.head.appendChild(style);
