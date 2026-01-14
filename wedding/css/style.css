@@ -241,16 +241,17 @@ body::before {
 }
 
 /* Venue */
-/* Venue */
 .venue {
     text-align: center;
     padding: 60px 20px;
-    background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('../images/venue_bg.png') no-repeat center center;
+    background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('../images/venue_bg.png') no-repeat center center;
     background-size: cover;
     margin-top: 30px;
     border-radius: 15px;
     border: 2px solid var(--gold);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 1);
 }
 
 .map-btn {
