@@ -85,32 +85,42 @@ const music = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
 
 function startExperience() {
-    document.getElementById('start-overlay').style.animation = 'fadeOut 1s forwards';
+    const envelope = document.getElementById('envelope');
+    const wrapper = document.getElementById('envelope-wrapper');
+
+    // Trigger animation
+    envelope.classList.add('opened');
+
+    // Music and Voice start after flap opens
     setTimeout(() => {
-        document.getElementById('start-overlay').style.display = 'none';
-    }, 1000);
+        // Attempt to play music
+        music.currentTime = 28; // Skip intro (Saregama)
+        music.play().then(() => {
+            isPlaying = true;
+            musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
 
-    // Attempt to play music
-    music.currentTime = 28; // Skip intro (Saregama)
-    music.play().then(() => {
-        isPlaying = true;
-        musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            // Voice Welcome
+            speakWelcome();
 
-        // Voice Welcome
-        speakWelcome();
+            // Auto-stop after 1 minute (60000ms)
+            musicTimeout = setTimeout(() => {
+                if (isPlaying) {
+                    music.pause();
+                    isPlaying = false;
+                    musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+                    console.log("Music auto-stopped after 1 minute");
+                }
+            }, 60000);
+        }).catch(e => {
+            console.log("Autoplay blocked, user must interact manually");
+        });
 
-        // Auto-stop after 1 minute (60000ms)
-        musicTimeout = setTimeout(() => {
-            if (isPlaying) {
-                music.pause();
-                isPlaying = false;
-                musicBtn.innerHTML = '<i class="fas fa-music"></i>';
-                console.log("Music auto-stopped after 1 minute");
-            }
-        }, 60000);
-    }).catch(e => {
-        console.log("Autoplay blocked, user must interact manually");
-    });
+        // Fade out envelope and show content
+        wrapper.style.animation = 'fadeOut 1s forwards';
+        setTimeout(() => {
+            wrapper.style.display = 'none';
+        }, 1000);
+    }, 1500); // Wait for flap animation
 }
 
 function speakWelcome() {
@@ -136,14 +146,7 @@ function toggleMusic() {
     isPlaying = !isPlaying;
 }
 
-// Add CSS for fadeOut
-const style = document.createElement('style');
-style.innerHTML = `
-@keyframes fadeOut {
-    to { opacity: 0; visibility: hidden; }
-}
-`;
-document.head.appendChild(style);
+
 
 // Countdown Timer
 function updateTimer() {
