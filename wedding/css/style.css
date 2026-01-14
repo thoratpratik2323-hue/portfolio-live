@@ -773,3 +773,11 @@ html {
         opacity: 1;
     }
 }
+
+.top-ganesh img {
+    mix-blend-mode: multiply;
+}
+
+#kalash-container img {
+    mix-blend-mode: multiply;
+}

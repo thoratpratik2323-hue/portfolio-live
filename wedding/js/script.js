@@ -11,19 +11,7 @@ async function initGreetings() {
     else if (hour >= 17 && hour < 21) timeGreeting = "शुभ संध्या";
     else timeGreeting = "शुभ रात्री";
 
-    // 2. City Detection
-    let cityMsg = "";
-    try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        if (data.city) {
-            cityMsg = `<br><small style="color:#d4af37">"${data.city} हून येणाऱ्या आपल्यासाठी विशेष शुभेच्छा!"</small>`;
-        }
-    } catch (e) {
-        console.log("City detection failed");
-    }
-
-    greetingEl.innerHTML = `<h3>${timeGreeting}</h3>${cityMsg}`;
+    greetingEl.innerHTML = `<h3>${timeGreeting}</h3>`;
     greetingEl.style.display = 'block';
 }
 
@@ -192,7 +180,6 @@ function startExperience() {
     // Music and Voice start after flap opens
     setTimeout(() => {
         // Attempt to play music
-        music.currentTime = 28; // Skip intro (Saregama)
         music.play().then(() => {
             isPlaying = true;
             musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
