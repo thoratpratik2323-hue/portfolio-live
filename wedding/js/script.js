@@ -88,6 +88,7 @@ function startExperience() {
     }, 1000);
 
     // Attempt to play music
+    music.currentTime = 28; // Skip intro (Saregama)
     music.play().then(() => {
         isPlaying = true;
         musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
