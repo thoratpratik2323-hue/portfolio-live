@@ -71,6 +71,36 @@
                 <h2>शुक्रवार दि. ०६ फेब्रुवारी २०२६</h2>
                 <p>दुपारी ११:५४ वा.</p>
             </div>
+
+            <!-- Countdown Timer -->
+            <div id="countdown" style="margin-top: 30px; display:flex; justify-content:center; gap:15px;">
+                <div class="timer-box"><span id="days">00</span><br><small>दिवस</small></div>
+                <div class="timer-box"><span id="hours">00</span><br><small>तास</small></div>
+                <div class="timer-box"><span id="minutes">00</span><br><small>मिनिटे</small></div>
+                <div class="timer-box"><span id="seconds">00</span><br><small>सेकंद</small></div>
+            </div>
+
+            <style>
+                .timer-box {
+                    background: var(--primary-color);
+                    color: #fff;
+                    padding: 10px 15px;
+                    border-radius: 8px;
+                    min-width: 60px;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                    border: 1px solid var(--gold);
+                }
+
+                .timer-box span {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                }
+
+                .timer-box small {
+                    font-size: 0.8rem;
+                    opacity: 0.8;
+                }
+            </style>
         </header>
 
         <!-- Events Section -->

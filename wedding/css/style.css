@@ -1,11 +1,12 @@
 /* Royal Traditional Theme */
 :root {
-    --bg-color: #fff5e6;
-    /* Cream */
+    --bg-color: #fffaf0;
+    /* Creamier White */
     --primary-color: #800000;
     /* Maroon */
     --gold: #d4af37;
-    --text-color: #4a4a4a;
+    --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+    --text-color: #2c0e0e;
 }
 
 body {
@@ -15,13 +16,41 @@ body {
     margin: 0;
     overflow-x: hidden;
     line-height: 1.6;
+    background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
 }
 
-/* Animations */
+/* Mandala Background Animation */
+body::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 800px;
+    background: url('https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-mandala-art-transparent-background-png-image_4966601.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.1;
+    /* Subtle */
+    transform: translate(-50%, -50%);
+    animation: rotateMandala 60s linear infinite;
+    z-index: -2;
+    pointer-events: none;
+}
+
+@keyframes rotateMandala {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
 
     to {
@@ -30,157 +59,226 @@ body {
     }
 }
 
+@keyframes goldShine {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
 .container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    /* Classy Glassy */
+    box-shadow: 0 10px 40px rgba(128, 0, 0, 0.15);
     min-height: 100vh;
-    border-left: 5px solid var(--gold);
-    border-right: 5px solid var(--gold);
+    border-left: 8px solid;
+    border-right: 8px solid;
+    border-image: var(--gold-gradient) 1;
+    position: relative;
+    backdrop-filter: blur(5px);
 }
 
 /* Hero Section */
 .hero {
     text-align: center;
-    padding: 40px 0;
-    border-bottom: 2px solid var(--gold);
-    background: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+    padding: 60px 0;
+    border-bottom: 2px solid transparent;
+    border-image: var(--gold-gradient) 1;
 }
 
 .ganesha {
     color: var(--primary-color);
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
 }
 
 .main-title {
-    color: var(--primary-color);
-    font-size: 3rem;
-    margin: 10px 0;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    font-family: 'Great Vibes', cursive, 'Tiro Devanagari Marathi';
+    color: #b8860b;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: goldShine 3s linear infinite;
+    font-size: 4rem;
+    margin: 15px 0;
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.1));
 }
 
 .invite-msg {
-    font-size: 1.1rem;
-    color: var(--text-color);
+    font-size: 1.2rem;
+    color: var(--primary-color);
 }
 
 /* Guest Box (Personalized) */
 .guest-box {
-    margin: 20px 0;
-    padding: 15px;
-    background: rgba(212, 175, 55, 0.1);
-    border: 1px dashed var(--gold);
-    border-radius: 10px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff8e1;
+    border: 2px solid #b8860b;
+    border-radius: 15px;
     display: none;
-    /* Hidden by default, shown by JS */
     animation: fadeIn 1s ease;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+    width: 80%;
 }
 
 .guest-box h3 {
     margin: 0;
     color: var(--primary-color);
+    font-size: 1.5rem;
 }
 
-.couple-names {
+.couple-section {
+    /* Improved Layout */
+    margin: 40px 0;
+    position: relative;
+}
+
+.person {
     margin: 30px 0;
 }
 
 .name {
     display: block;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     color: var(--primary-color);
     font-weight: bold;
+    text-shadow: 1px 1px 0px #ffd700;
 }
 
-.amp {
-    font-size: 1.5rem;
-    color: var(--gold);
+.degree {
+    font-size: 1rem;
+    color: #666;
+    font-weight: normal;
+}
+
+.parents {
+    font-size: 0.95rem;
+    color: #555;
+    margin-top: 5px;
+}
+
+.divider {
+    margin: 10px 0;
 }
 
 .date-box {
     background: var(--primary-color);
+    background: linear-gradient(to right, #800000, #a00000);
     color: #fff;
-    padding: 10px 30px;
+    padding: 15px 40px;
     display: inline-block;
     border-radius: 50px;
-    margin-top: 20px;
-    border: 2px solid var(--gold);
+    margin-top: 30px;
+    border: 3px solid #d4af37;
+    box-shadow: 0 5px 15px rgba(128, 0, 0, 0.3);
 }
 
 /* Events Timeline */
 .events {
-    padding: 40px 0;
+    padding: 50px 0;
     text-align: center;
 }
 
 .section-title {
-    color: var(--gold);
-    border-bottom: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-bottom: 3px double var(--gold);
     display: inline-block;
-    margin-bottom: 30px;
-    padding-bottom: 5px;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+    font-size: 2rem;
 }
 
 .event-card {
     background: white;
-    margin: 15px 0;
-    padding: 20px;
-    border-radius: 10px;
+    margin: 20px 0;
+    padding: 25px;
+    border-radius: 12px;
     border: 1px solid var(--gold);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--gold-gradient);
 }
 
 .event-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
 .main-event {
-    background: #fff0f0;
+    background: #fff5f5;
     border: 2px solid var(--primary-color);
 }
 
 .event-card i {
     color: var(--primary-color);
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    background: #fff0f0;
+    padding: 15px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
 }
 
 /* Venue */
 .venue {
     text-align: center;
-    padding: 20px;
-    background: #fdfdfd;
-    margin-top: 20px;
-    border-radius: 10px;
+    padding: 40px;
+    background: #fff;
+    margin-top: 30px;
+    border-radius: 15px;
+    border: 1px dashed var(--gold);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
 .map-btn {
     display: inline-block;
     background: var(--primary-color);
     color: white;
-    padding: 10px 20px;
+    padding: 12px 30px;
     text-decoration: none;
-    border-radius: 5px;
-    margin-top: 15px;
-    transition: background 0.3s;
+    border-radius: 25px;
+    margin-top: 20px;
+    transition: background 0.3s, transform 0.2s;
+    font-weight: bold;
+    border: 2px solid transparent;
 }
 
 .map-btn:hover {
-    background: #600000;
+    background: white;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: scale(1.05);
 }
 
 /* Footer */
 footer {
     text-align: center;
-    padding: 40px 0;
-    margin-top: 20px;
-    border-top: 1px solid var(--gold);
+    padding: 50px 0;
+    margin-top: 40px;
+    border-top: 4px double var(--gold);
     color: var(--text-color);
+    background: #fffcf5;
 }
 
 /* Petals Canvas */
