@@ -116,7 +116,7 @@ function startExperience() {
 function speakWelcome() {
     if ('speechSynthesis' in window) {
         const msg = new SpeechSynthesisUtterance();
-        msg.text = "थोरत परिवारातर्फे सस्नेह निमंत्रण";
+        msg.text = "सस्नेह निमंत्रण";
         msg.lang = 'mr-IN';
         msg.rate = 0.9;
         msg.pitch = 1.1;
