@@ -2162,3 +2162,203 @@ html.lenis {
         gap: 35px;
     }
 }
+
+/* ==========================================================================
+   MOBILE-FRIENDLY & RESPONSIVE DESIGN ENHANCEMENTS
+   ========================================================================== */
+
+/* Tablet & Smaller Desktop Viewports (< 992px) */
+@media (max-width: 992px) {
+    .about-quote-container {
+        grid-column: span 1;
+    }
+}
+
+/* Mobile Devices & Small Tablets (< 768px) */
+@media (max-width: 768px) {
+    /* Hide custom cursors on touch screens to prevent visual bugs and tap interference */
+    .cursor, .cursor-follower {
+        display: none !important;
+    }
+    
+    body {
+        cursor: default !important;
+    }
+    
+    /* Layout elements spacing */
+    section {
+        padding: 70px 0 !important;
+    }
+    
+    .section-title {
+        font-size: 2rem !important;
+        margin-bottom: 50px !important;
+    }
+    
+    /* Header Section adjustments */
+    header {
+        height: auto !important;
+        min-height: 100vh;
+        padding: 120px 0 60px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .profile-container {
+        width: 140px;
+        height: 140px;
+        margin-bottom: 25px;
+    }
+    
+    .hacker-hat {
+        font-size: 2.2rem;
+        top: -30px;
+    }
+    
+    .name {
+        font-size: 2.5rem !important;
+    }
+    
+    .tagline {
+        font-size: 1rem !important;
+        margin-bottom: 15px;
+        letter-spacing: 0.03em;
+    }
+    
+    .typing-text {
+        font-size: 0.95rem !important;
+        margin-bottom: 25px;
+        height: auto;
+    }
+    
+    /* HUD Status Ticker adjustments to prevent overflow */
+    .hud-ticker-container {
+        max-width: 95%;
+        padding: 8px 12px;
+    }
+    
+    .ticker-wrapper {
+        width: 200px !important;
+    }
+    
+    .ticker-content span {
+        font-size: 0.75rem;
+    }
+    
+    /* Dossier console box padding tweaks */
+    .console-body {
+        padding: 20px !important;
+    }
+    
+    .dossier-spec-group {
+        padding: 18px !important;
+    }
+    
+    /* Flex wrap terminal footer elements */
+    .terminal-footer-status {
+        flex-wrap: wrap !important;
+        gap: 10px 15px !important;
+    }
+    
+    .about-quote-container {
+        padding: 30px 15px !important;
+        margin-top: 30px !important;
+    }
+    
+    .about-quote {
+        font-size: 1.15rem !important;
+    }
+    
+    /* Projects responsiveness */
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)) !important;
+        gap: 25px;
+    }
+    
+    /* Mobile-friendly active navigation links styling */
+    .nav-links {
+        width: 80% !important;
+        max-width: 320px;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
+        padding: 40px 20px;
+    }
+}
+
+/* Extra Small Devices (< 576px) */
+@media (max-width: 576px) {
+    .terminal-meta-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
+    }
+    
+    .contact-form {
+        padding: 25px 20px !important;
+    }
+}
+
+/* Very Small Mobile Viewports (< 480px) */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.3rem !important;
+    }
+    
+    .name {
+        font-size: 2.1rem !important;
+    }
+    
+    .ticker-wrapper {
+        width: 170px !important;
+    }
+    
+    .ticker-label {
+        font-size: 0.7rem;
+        margin-right: 5px;
+    }
+    
+    .ticker-arrow {
+        margin-right: 8px;
+    }
+    
+    /* Projects Grid specifications layout single column to fit text */
+    .project-specs-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        padding: 12px !important;
+    }
+    
+    .skills-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .theme-toggle, .scroll-to-top {
+        width: 44px !important;
+        height: 44px !important;
+        bottom: 15px;
+    }
+    
+    .theme-toggle {
+        left: 15px;
+    }
+    
+    .scroll-to-top {
+        right: 15px;
+    }
+}
+
+/* Micro Devices (< 360px) */
+@media (max-width: 360px) {
+    .name {
+        font-size: 1.8rem !important;
+    }
+    
+    .ticker-wrapper {
+        width: 140px !important;
+    }
+}

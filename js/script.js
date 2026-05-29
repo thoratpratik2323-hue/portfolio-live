@@ -14,59 +14,68 @@ let mouseX = 0, mouseY = 0;
 let cursorX = 0, cursorY = 0;
 let followerX = 0, followerY = 0;
 
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    
-    if (cursor) {
-        cursor.style.left = mouseX + 'px';
-        cursor.style.top = mouseY + 'px';
-    }
-});
+// Touch device or mobile check to prevent performance drop and visual bugs
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 768;
 
-// Smooth lerp animation for the follower target reticle
-function animateCursor() {
-    // Lerp logic for smooth tracking
-    const ease = 0.12;
-    followerX += (mouseX - followerX) * ease;
-    followerY += (mouseY - followerY) * ease;
-    
-    if (cursorFollower) {
-        cursorFollower.style.left = followerX + 'px';
-        cursorFollower.style.top = followerY + 'px';
+if (!isTouchDevice) {
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        if (cursor) {
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        }
+    });
+
+    // Smooth lerp animation for the follower target reticle
+    function animateCursor() {
+        // Lerp logic for smooth tracking
+        const ease = 0.12;
+        followerX += (mouseX - followerX) * ease;
+        followerY += (mouseY - followerY) * ease;
+        
+        if (cursorFollower) {
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+        }
+        
+        requestAnimationFrame(animateCursor);
     }
-    
-    requestAnimationFrame(animateCursor);
+    animateCursor();
+
+    // Mouse states
+    document.addEventListener('mousedown', () => {
+        if (cursor) cursor.style.transform = 'scale(0.7)';
+        if (cursorFollower) cursorFollower.style.transform = 'scale(0.8) rotate(45deg)';
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (cursor) cursor.style.transform = 'scale(1)';
+        if (cursorFollower) cursorFollower.style.transform = 'scale(1) rotate(0deg)';
+    });
+
+    // Interactive hover bindings
+    document.addEventListener('mouseover', (e) => {
+        const target = e.target.closest('a, button, .btn, .project-card, .skill-card, .profile-container, .theme-toggle, .scroll-to-top, .filter-btn');
+        if (target) {
+            cursor.classList.add('hovered');
+            cursorFollower.classList.add('hovered');
+        }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+        const target = e.target.closest('a, button, .btn, .project-card, .skill-card, .profile-container, .theme-toggle, .scroll-to-top, .filter-btn');
+        if (target) {
+            cursor.classList.remove('hovered');
+            cursorFollower.classList.remove('hovered');
+        }
+    });
+} else {
+    // Completely hide cursor elements if touch/mobile device
+    if (cursor) cursor.style.display = 'none';
+    if (cursorFollower) cursorFollower.style.display = 'none';
 }
-animateCursor();
-
-// Mouse states
-document.addEventListener('mousedown', () => {
-    if (cursor) cursor.style.transform = 'scale(0.7)';
-    if (cursorFollower) cursorFollower.style.transform = 'scale(0.8) rotate(45deg)';
-});
-
-document.addEventListener('mouseup', () => {
-    if (cursor) cursor.style.transform = 'scale(1)';
-    if (cursorFollower) cursorFollower.style.transform = 'scale(1) rotate(0deg)';
-});
-
-// Interactive hover bindings
-document.addEventListener('mouseover', (e) => {
-    const target = e.target.closest('a, button, .btn, .project-card, .skill-card, .profile-container, .theme-toggle, .scroll-to-top, .filter-btn');
-    if (target) {
-        cursor.classList.add('hovered');
-        cursorFollower.classList.add('hovered');
-    }
-});
-
-document.addEventListener('mouseout', (e) => {
-    const target = e.target.closest('a, button, .btn, .project-card, .skill-card, .profile-container, .theme-toggle, .scroll-to-top, .filter-btn');
-    if (target) {
-        cursor.classList.remove('hovered');
-        cursorFollower.classList.remove('hovered');
-    }
-});
 
 // Loading Animation & Initializations
 function deactivateLoading() {
@@ -111,11 +120,23 @@ if (savedTheme) {
 // Mobile Menu
 mobileMenuBtn.addEventListener('click', function () {
     navLinks.classList.toggle('active');
+    const icon = mobileMenuBtn.querySelector('i');
+    if (icon) {
+        if (navLinks.classList.contains('active')) {
+            icon.className = 'fas fa-times';
+        } else {
+            icon.className = 'fas fa-bars';
+        }
+    }
 });
 
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', function () {
         navLinks.classList.remove('active');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (icon) {
+            icon.className = 'fas fa-bars';
+        }
     });
 });
 
@@ -455,12 +476,16 @@ filterBtns.forEach(btn => {
 
 // Tilt.js
 if (typeof VanillaTilt !== 'undefined') {
-    VanillaTilt.init(document.querySelectorAll(".skill-card, .project-card, .profile-container, .saturday-ai-image"), {
-        max: 15,
-        speed: 400,
-        glare: true,
-        "max-glare": 0.2,
-    });
+    // Disable Tilt on touch devices to avoid janky scroll movement
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (!isTouch) {
+        VanillaTilt.init(document.querySelectorAll(".skill-card, .project-card, .profile-container, .saturday-ai-image"), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.2,
+        });
+    }
 }
 
 
