@@ -575,6 +575,7 @@ header {
 section {
     padding: 120px 0;
     position: relative;
+    scroll-margin-top: 80px;
 }
 
 .section-title {
@@ -1821,6 +1822,19 @@ html.lenis {
     opacity: 0.5;
     margin-bottom: 25px;
     letter-spacing: -0.05em;
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: clip;
+}
+
+.terminal-banner span {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: clip;
 }
 
 .terminal-section {
@@ -2188,6 +2202,7 @@ html.lenis {
     /* Layout elements spacing */
     section {
         padding: 70px 0 !important;
+        scroll-margin-top: 70px !important;
     }
     
     .section-title {
@@ -2290,6 +2305,10 @@ html.lenis {
     .terminal-meta-grid {
         grid-template-columns: 1fr !important;
         gap: 10px !important;
+    }
+    
+    .meta-item {
+        grid-column: span 1 !important;
     }
     
     .footer-content {

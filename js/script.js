@@ -82,6 +82,22 @@ function deactivateLoading() {
     if (loading && !loading.classList.contains('hidden')) {
         loading.classList.add('hidden');
         initAnimations();
+        
+        // Recalculate ScrollTrigger metrics and Lenis layout after display switches to visible
+        setTimeout(() => {
+            if (typeof ScrollTrigger !== 'undefined') {
+                ScrollTrigger.refresh();
+            }
+            if (typeof lenis !== 'undefined') {
+                lenis.resize();
+            }
+        }, 150);
+
+        setTimeout(() => {
+            if (typeof ScrollTrigger !== 'undefined') {
+                ScrollTrigger.refresh();
+            }
+        }, 800);
     }
 }
 
@@ -175,8 +191,9 @@ type();
 // --- PHASE 2 & 3: NEW VISUAL FEATURES ---
 
 // 1. Lenis Smooth Scrolling
+let lenis;
 if (typeof Lenis !== 'undefined') {
-    const lenis = new Lenis({
+    lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical',
