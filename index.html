@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratik Thorat | Full Stack Developer</title>
+    <meta name="description" content="Pratik Thorat - Full Stack Developer. I build things for the web and explore AI.">
+    <meta property="og:title" content="Pratik Thorat | Full Stack Developer">
+    <meta property="og:description"
+        content="Portfolio of Pratik Thorat. Featuring AI visualizations, futuristic e-commerce, and productivity apps.">
+    <meta property="og:image" content="images/profile.jpg">
+    <meta property="og:url" content="https://pratikthorat.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pratik Thorat | Full Stack Developer">
+    <meta name="twitter:description" content="I build systems, not just websites. Explore my work in AI and Web.">
+    <meta name="twitter:image" content="images/profile.jpg">
+    <!-- Google Fonts (Syne for headings, Plus Jakarta Sans for body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/jpg" href="images/profile.jpg">
+</head>
+
+<body>
+    <!-- Cyberpunk Ambient Grid Overlay -->
+    <div class="cyber-grid"></div>
+
+    <!-- Animated Ambient Glow Blobs -->
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+    <div class="glow-blob blob-3"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower">
+        <div class="reticle-dot"></div>
+    </div>
+
+    <!-- Loading Animation -->
+    <div class="loading" id="loading">
+        <div class="spinner-box">
+            <div class="spinner-circle circle-1"></div>
+            <div class="spinner-circle circle-2"></div>
+            <div class="spinner-text">INITIALIZING SYSTEMS...</div>
+        </div>
+    </div>
+
+    <!-- Notification System -->
+    <div class="notification" id="notification"></div>
+
+    <!-- 3D Background -->
+    <canvas id="bg-canvas"></canvas>
+
+
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container glass">
+        <nav class="container">
+            <div class="logo hacker-text" data-value="Pratik Thorat">Pratik Thorat</div>
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="hacker-text" data-value="Home">Home</a>
+                <a href="#about" class="hacker-text" data-value="About">About</a>
+                <a href="#projects" class="hacker-text" data-value="Projects">Projects</a>
+                <a href="#skills" class="hacker-text" data-value="Skills">Skills</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Header Section -->
+    <header id="home">
+        <div class="container">
+            <div class="profile-container" data-tilt>
+                <div class="hacker-hat"></div>
+                <div class="profile-img">
+                    <!-- Fixed profile image with proper fallback -->
+                    <img src="images/profile.jpg" alt="Pratik Thorat - Full Stack Developer"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+            <h1 class="name hacker-text" data-value="Pratik Thorat">Pratik Thorat</h1>
+            <p class="tagline">I build systems, not just websites.</p>
+            <div class="typing-text" id="typingText"></div>
+            
+            <!-- System Status Logs Ticker -->
+            <div class="hud-ticker-container">
+                <span class="ticker-label">[ STATUS LOGS ]</span>
+                <span class="ticker-arrow">▶</span>
+                <div class="ticker-wrapper">
+                    <div class="ticker-content">
+                        <span>SYS_INIT: COMPILING COGNITIVE SHARDS...</span>
+                        <span>AI_CORE: ONLINE - AGENTS ALIGNED...</span>
+                        <span>KERNEL: LINUX Core 6.1 RHEL - SECURED...</span>
+                        <span>PENTEST_MODULE: ACTIVE - PAYLOADS NOMINAL...</span>
+                        <span>GRAPHICS_ENGINE: WebGL THREE.JS - LOADED...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social-links" style="margin-top: 30px;">
+                <a href="https://github.com/pratikpt1908" target="_blank" rel="noopener noreferrer" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.instagram.com/pratik_pt1908?igsh=MTE3cXg1NHU1OXZyMA==" target="_blank"
+                    rel="noopener noreferrer" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="cyber-grid"></div>
+        <div class="container">
+            <h2 class="section-title">System Profile</h2>
+            
+            <!-- Unified Cyber Dossier Box -->
+            <div class="about-dossier-box spotlight-card">
+                <div class="console-header">
+                    <div class="console-buttons">
+                        <span class="btn-dot close"></span>
+                        <span class="btn-dot minimize"></span>
+                        <span class="btn-dot maximize"></span>
+                    </div>
+                    <div class="console-title hacker-text" data-value="PRATIK_THORAT_IPVERSE.dec">PRATIK_THORAT_IPVERSE.dec</div>
+                    <div class="console-status"><span class="pulse-dot"></span> SECURE SHARD STABLE</div>
+                </div>
+                <div class="console-body">
+                    <div class="console-scanner"></div>
+                    
+                    <div class="dossier-grid">
+                        <!-- Left Part: Biography & Mission -->
+                        <div class="dossier-bio-section">
+                            <div class="console-line"><span class="prompt">pratik_pt1908@sys_core:~$</span> ./decrypt_profile.sh</div>
+                            
+                            <div class="terminal-manifest">
+                                <div class="terminal-banner">
+                                    [ SYSTEM DECRYPT: SUCCESSFUL ]
+                                    <span>======================================================</span>
+                                </div>
+                                
+                                <div class="terminal-meta-grid">
+                                    <div class="meta-item"><span class="meta-label">IDENTITY:</span> <span class="meta-value text-cherry">PRATIK THORAT</span></div>
+                                    <div class="meta-item"><span class="meta-label">ROLE:</span> <span class="meta-value text-cyan">FULL STACK DEVELOPER</span></div>
+                                    <div class="meta-item"><span class="meta-label">KERNEL:</span> <span class="meta-value">RHEL / LINUX Core</span></div>
+                                    <div class="meta-item"><span class="meta-label">STATUS:</span> <span class="meta-value text-green">100% OPERATIONAL</span></div>
+                                    <div class="meta-item" style="grid-column: span 2; margin-top: 5px;"><span class="meta-label">EMPIRE_STATUS:</span> <span class="meta-value text-cherry" style="font-weight: bold; text-shadow: 0 0 8px var(--primary-glow);"><i class="fas fa-crown" style="margin-right: 6px;"></i>BUILDING OWN EMPIRE (IP VERSE)</span></div>
+                                </div>
+                                
+                                <div class="terminal-separator">------------------------------------------------------</div>
+                                
+                                <div class="terminal-section">
+                                    <div class="section-tag">[01 // MISSION STATEMENT]</div>
+                                    <h3 class="manifest-title">Building Fast, Scalable & Beautiful Digital Products</h3>
+                                    <p class="manifest-p">I’m a passionate Full Stack Developer focused on creating modern digital experiences that combine clean design, powerful functionality, and real-world impact. Inspired by the infinite scaling of the cosmos and the precision of astrophysics, I enjoy transforming ambitious ideas into polished products that feel smooth, fast, and intuitive.</p>
+                                </div>
+
+                                <div class="terminal-section">
+                                    <div class="section-tag">[02 // THE EMPIRE // IP VERSE]</div>
+                                    <h3 class="manifest-title" style="color: var(--secondary); text-shadow: 0 0 8px var(--secondary-glow);"><i class="fas fa-satellite-dish" style="margin-right: 8px;"></i>Building Own Empire: IP Verse</h3>
+                                    <p class="manifest-p">Driven by absolute autonomy and technological sovereignty, I am actively building my own digital empire — **IP Verse**. An ecosystem built for next-generation intelligence, scalable architectures, and seamless digital integration.</p>
+                                </div>
+                                
+                                <div class="terminal-section">
+                                    <div class="section-tag">[03 // SYSTEM ARCHITECTURE]</div>
+                                    <p class="manifest-p">My work goes beyond just writing code — I love architecting complete systems, designing engaging interfaces, optimizing performance, and building applications that users genuinely enjoy using. Whether it’s crafting responsive frontends, scalable backend systems, or AI-powered experiences, I’m always driven by innovation and attention to detail.</p>
+                                </div>
+                                
+                                <div class="terminal-section">
+                                    <div class="section-tag">[04 // CONTINUOUS COMPILATION]</div>
+                                    <p class="manifest-p">Just like the universe itself, my stack is constantly expanding. I’m always learning new technologies, tracking deep-space astrophotography, exploring cutting-edge tools, and pushing myself to build smarter, faster, and more efficient software every day.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Part: Capabilities & Sub-systems -->
+                        <div class="dossier-specs-section">
+                            <!-- What I Bring -->
+                            <div class="dossier-spec-group">
+                                <div class="spec-group-header">
+                                    <i class="fas fa-microchip cherry-glow"></i>
+                                    <h4>What I Bring</h4>
+                                    <span class="status-badge green">ONLINE</span>
+                                </div>
+                                <ul class="about-list">
+                                    <li class="about-list-item">
+                                        <span class="fa-icon cherry"><i class="fas fa-bolt"></i></span>
+                                        <span><strong>High-performance</strong>, scalable development</span>
+                                    </li>
+                                    <li class="about-list-item">
+                                        <span class="fa-icon cyan"><i class="fas fa-wand-magic-sparkles"></i></span>
+                                        <span>Modern, <strong>pixel-perfect</strong> UI/UX experiences</span>
+                                    </li>
+                                    <li class="about-list-item">
+                                        <span class="fa-icon cherry"><i class="fas fa-shield-halved"></i></span>
+                                        <span><strong>Secure architecture</strong> & clean coding practices</span>
+                                    </li>
+                                    <li class="about-list-item">
+                                        <span class="fa-icon cyan"><i class="fas fa-network-wired"></i></span>
+                                        <span><strong>CI/CD pipelines</strong> & cloud-native deployments</span>
+                                    </li>
+                                    <li class="about-list-item">
+                                        <span class="fa-icon cherry"><i class="fas fa-brain"></i></span>
+                                        <span><strong>AI integration</strong> & automation-focused solutions</span>
+                                    </li>
+                                    <li class="about-list-item">
+                                        <span class="fa-icon cyan"><i class="fas fa-terminal"></i></span>
+                                        <span>Strong passion for <strong>problem-solving</strong> & innovation</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Beyond Coding -->
+                            <div class="dossier-spec-group" style="margin-top: 35px;">
+                                <div class="spec-group-header">
+                                    <i class="fas fa-user-astronaut cyan-glow"></i>
+                                    <h4>Beyond Coding</h4>
+                                    <span class="status-badge purple">SUB-SYSTEMS</span>
+                                </div>
+                                <ul class="about-list">
+                                    <li class="about-list-item">
+                                        <span class="fa-icon cyan"><i class="fas fa-chess-knight"></i></span>
+                                        <span>Playing <strong>chess</strong> & improving strategic thinking</span>
+                                    </li>
+                                    <li class="about-list-item">
+                                        <span class="fa-icon cherry"><i class="fas fa-user-astronaut"></i></span>
+                                        <span>Studying <strong>Cosmology & Astronomy</strong> – exploring astrophysics and deep space wonders</span>
+                                    </li>
+                                    <li class="about-list-item">
+                                        <span class="fa-icon cyan"><i class="fab fa-linux"></i></span>
+                                        <span>Exploring <strong>Linux</strong> & the Red Hat ecosystem</span>
+                                    </li>
+                                    <li class="about-list-item">
+                                        <span class="fa-icon cherry"><i class="fas fa-circle-play"></i></span>
+                                        <span>Watching <strong>anime</strong> and discovering creative storytelling</span>
+                                    </li>
+                                    <li class="about-list-item">
+                                        <span class="fa-icon cyan"><i class="fas fa-meteor"></i></span>
+                                        <span>Tracking <strong>meteor showers & space events</strong> – finding inspiration in the cosmos</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="terminal-footer-status" style="margin-top: 40px;">
+                        <span class="footer-badge"><i class="fas fa-lock"></i> AES-256 SECURED SHARED IPVERSE</span>
+                        <span class="footer-badge"><i class="fas fa-network-wired"></i> PORT 8000</span>
+                        <span class="footer-badge"><i class="fas fa-satellite"></i> COGNITIVE STACKS: ALIGNED</span>
+                    </div>
+
+                    <div class="console-line" style="margin-top: 25px; margin-bottom: 0;"><span class="prompt">pratik_pt1908@sys_core:~$</span> <span class="typing-cursor">█</span></div>
+                </div>
+            </div>
+
+            <!-- Inspirational Quote -->
+            <div class="about-quote-container">
+                <p class="about-quote">“Great products are built where technology, creativity, and curiosity come together.”</p>
+                <div class="quote-tech-hud">
+                    <span class="hud-line-left"></span>
+                    <i class="fas fa-crosshairs"></i>
+                    <span class="hud-line-right"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">What I've Built</h2>
+            <div
+                style="text-align: center; max-width: 800px; margin: 0 auto 40px auto; padding: 15px; background: rgba(255, 59, 59, 0.1); border-left: 4px solid var(--primary); border-radius: 4px;">
+                <p style="margin: 0; color: #ccc; font-size: 0.95rem;">
+                    <i class="fas fa-info-circle" style="color: var(--primary); margin-right: 8px;"></i>
+                    <strong>Note:</strong> These are simplified <span style="color: var(--primary);">interactive
+                        demos</span> designed for this portfolio.
+                    The real-world production versions include backend integration, authentication, and advanced
+                    features.
+                </p>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Project: SMS Payload System (Flagship Edition) -->
+                <div class="project-card premium-project spotlight-card" data-category="web" data-tilt>
+                    <div class="project-img">
+                        <img src="images/sms_logo.png" alt="SMS Payload System" onerror="this.src='images/profile.jpg';">
+                        <div class="project-scanner-bar"></div>
+                        <span class="project-tag-floating">[ FLAGSHIP MODULE ]</span>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-header-row">
+                            <h3 class="project-title">SMS Payload System v5.0</h3>
+                            <span class="status-badge green">STABLE</span>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-badge"><i class="fab fa-python"></i> Python / Flask</span>
+                            <span class="tech-badge"><i class="fas fa-tower-broadcast"></i> SSE Streaming</span>
+                            <span class="tech-badge"><i class="fas fa-terminal"></i> Matrix Terminal</span>
+                            <span class="tech-badge"><i class="fas fa-user-secret"></i> Exploit Testing</span>
+                        </div>
+                        <p class="project-desc">An advanced, high-performance security utility for testing SMS routing layers. Equipped with real-time SSE event logging, customized dynamic payload constructs, and a fully interactive, reactive retro-hacker terminal console.</p>
+                        
+                        <div class="project-specs-grid">
+                            <div class="spec-item"><span class="spec-label">ENCRYPTION SHARDS</span><span class="spec-val">ACTIVE (4/4)</span></div>
+                            <div class="spec-item"><span class="spec-label">ESTIMATED LATENCY</span><span class="spec-val text-green">24ms</span></div>
+                            <div class="spec-item"><span class="spec-label">INTEGRITY LAYER</span><span class="spec-val">99.98% SUCCESS</span></div>
+                            <div class="spec-item"><span class="spec-label">LICENSE CERT</span><span class="spec-val">RED-HAT Core</span></div>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://sms-payload-system.onrender.com" class="project-link demo-link magnetic" target="_blank"><i class="fas fa-play"></i> EXECUTE LIVE</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project: IP Prime (AI Desktop OS Flagship) -->
+                <div class="project-card premium-project spotlight-card" data-category="ai" data-tilt>
+                    <div class="project-img">
+                        <img src="images/voice_assistant.png" alt="IP Prime" onerror="this.src='images/profile.jpg';">
+                        <div class="project-scanner-bar"></div>
+                        <span class="project-tag-floating">[ OS CORE PARTNER ]</span>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-header-row">
+                            <h3 class="project-title">IP Prime // AI Desktop</h3>
+                            <span class="status-badge green">ACTIVE</span>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-badge"><i class="fab fa-python"></i> Python / PyQt6</span>
+                            <span class="tech-badge"><i class="fas fa-microphone"></i> Voice UI & ASR</span>
+                            <span class="tech-badge"><i class="fas fa-desktop"></i> Screen Vision AI</span>
+                            <span class="tech-badge"><i class="fab fa-redhat"></i> RHEL Systems Controller</span>
+                        </div>
+                        <p class="project-desc">A masterpiece personal AI desktop partner envisioned, engineered, and hand-coded entirely by me from the ground up. IP Prime is a real-time, voice-driven powerhouse running locally to bridge human intent with operating system execution. Equipped with active screen-vision capture, parallel multi-agent swarms, Playwright browser automation (Camoufox), and a secure self-healing file compiler synced with a local markdown Knowledge Vault.</p>
+                        
+                        <div class="project-specs-grid">
+                            <div class="spec-item"><span class="spec-label">SOLE ARCHITECT</span><span class="spec-val">PRATIK THORAT</span></div>
+                            <div class="spec-item"><span class="spec-label">COGNITIVE ORB</span><span class="spec-val">GEMINI GENAI CLIENT</span></div>
+                            <div class="spec-item"><span class="spec-label">AUTONOMY SCALE</span><span class="spec-val">MULTI-AGENT SWARM</span></div>
+                            <div class="spec-item"><span class="spec-label">HUD INTERFACE</span><span class="spec-val">PYQT6 GLASSMORPHIC</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project: Ches AI (Strategic Battleground) -->
+                <div class="project-card premium-project spotlight-card" data-category="ai" data-tilt>
+                    <div class="project-img">
+                        <img src="images/neonverse.png" alt="Ches AI" onerror="this.src='images/profile.jpg';">
+                        <div class="project-scanner-bar"></div>
+                        <span class="project-tag-floating">[ NEURAL BATTLEGROUND ]</span>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-header-row">
+                            <h3 class="project-title">Ches AI // Neural Engine</h3>
+                            <span class="status-badge green">ACTIVE</span>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-badge"><i class="fab fa-js"></i> JS / Canvas</span>
+                            <span class="tech-badge"><i class="fas fa-brain"></i> Stockfish Engine</span>
+                            <span class="tech-badge"><i class="fas fa-microchip"></i> Alpha-Beta Pruning</span>
+                            <span class="tech-badge"><i class="fas fa-chess"></i> Strategic UI</span>
+                        </div>
+                        <p class="project-desc">A highly responsive, custom-themed digital chess environment equipped with stockfish intelligence, opening book heuristics, real-time board evaluations, and a gorgeous reactive cyberpunk neon visual matrix board.</p>
+                        
+                        <div class="project-specs-grid">
+                            <div class="spec-item"><span class="spec-label">EVALUATION SPEED</span><span class="spec-val">1.2M NODES/S</span></div>
+                            <div class="spec-item"><span class="spec-label">AI RATING</span><span class="spec-val text-green">2800+ ELO CAPABLE</span></div>
+                            <div class="spec-item"><span class="spec-label">BOARD LAYOUT</span><span class="spec-val">OBSIDIAN NEON</span></div>
+                            <div class="spec-item"><span class="spec-label">INTERACTION ENGINE</span><span class="spec-val">CANVAS / WebGL</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3 class="skill-title">Web Development</h3>
+                    <p>Building scalable, interactive websites and premium modern web apps.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3 class="skill-title">Frontend UI/UX</h3>
+                    <p>Crafting gorgeous, responsive user interfaces with premium transitions.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-server"></i></div>
+                    <h3 class="skill-title">Backend Logic</h3>
+                    <p>Building robust, scalable server side systems with Node.js, Next.js & Python.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                    <h3 class="skill-title">Artificial Intelligence</h3>
+                    <p>Custom LLM integrations, autonomous agent architectures, and intelligence tooling.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-microchip"></i></div>
+                    <h3 class="skill-title">Machine & Deep Learning</h3>
+                    <p>Training and deploying neural networks, computer vision, and predictive data modeling.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-user-secret"></i></div>
+                    <h3 class="skill-title">Cybersecurity & Red Teaming</h3>
+                    <p>Penetration testing, vulnerability research, and creating custom exploit payloads.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fab fa-redhat"></i></div>
+                    <h3 class="skill-title">Red Hat & Linux Admin</h3>
+                    <p>Complete systems administration, advanced scripting, security audits, and deployment.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-cloud"></i></div>
+                    <h3 class="skill-title">Cloud & DevOps</h3>
+                    <p>CI/CD automation, docker containment, secure hosting, and infrastructure management.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-cube"></i></div>
+                    <h3 class="skill-title">Immersive Web</h3>
+                    <p>High-performance 3D WebGL experiences using Three.js and GSAP engines.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-microphone-lines"></i></div>
+                    <h3 class="skill-title">Voice AI</h3>
+                    <p>Speech pipelines, transcription, and real-time audio systems (LiveKit / OpenAI).</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-terminal"></i></div>
+                    <h3 class="skill-title">Real-time Streaming</h3>
+                    <p>Server-Sent Events (SSE), event-driven logs, WebSockets, and real-time data feeds.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-database"></i></div>
+                    <h3 class="skill-title">Database Architecture</h3>
+                    <p>Custom schema modeling, performance tuning, and secure data layers (SQL, NoSQL, Redis).</p>
+                </div>
+            </div>
+
+            <!-- Progress Bars -->
+            <div class="progress-bars">
+                <div class="progress-item">
+                    <div class="progress-info"><span>HTML/CSS & UI Design</span><span>95%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="95"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>JavaScript / TypeScript</span><span>92%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="92"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>React & Next.js</span><span>88%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="88"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>Python & Artificial Intelligence</span><span>90%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="90"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>Machine & Deep Learning (ML)</span><span>88%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="88"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>Cybersecurity & Pentesting</span><span>86%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="86"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>Red Hat Enterprise Linux (RHEL)</span><span>87%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="87"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>Node.js / Express</span><span>85%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="85"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>Three.js & 3D WebGL</span><span>75%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="75"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info"><span>Databases & Redis Caching</span><span>85%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="85"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Pratik Thorat</h3>
+                    <p>Just a guy who is obsessed with code and creating.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#skills">Skills</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="footer-links">
+                        <a href="https://github.com/pratikpt1908" target="_blank">GitHub</a>
+                        <a href="https://www.instagram.com/pratik_pt1908?igsh=MTE3cXg1NHU1OXZyMA=="
+                            target="_blank">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <p class="footer-text">© 2025 Pratik Thorat. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
