@@ -2302,6 +2302,26 @@ html.lenis {
 
 /* Extra Small Devices (< 576px) */
 @media (max-width: 576px) {
+    .console-header {
+        flex-direction: column !important;
+        gap: 8px !important;
+        align-items: center !important;
+        text-align: center !important;
+        padding: 12px 15px !important;
+    }
+    
+    .console-buttons {
+        margin-bottom: 4px !important;
+    }
+    
+    .console-title {
+        font-size: 0.75rem !important;
+    }
+    
+    .console-status {
+        font-size: 0.65rem !important;
+    }
+
     .terminal-meta-grid {
         grid-template-columns: 1fr !important;
         gap: 10px !important;
@@ -2342,6 +2362,19 @@ html.lenis {
     
     .ticker-arrow {
         margin-right: 8px;
+    }
+    
+    /* Meta items stacked vertically on very small viewports */
+    .meta-item {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+        align-items: flex-start !important;
+    }
+    
+    .spec-group-header {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
     }
     
     /* Projects Grid specifications layout single column to fit text */
