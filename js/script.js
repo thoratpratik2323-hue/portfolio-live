@@ -68,13 +68,26 @@ document.addEventListener('mouseout', (e) => {
     }
 });
 
-// Loading Animation
-window.addEventListener('load', function () {
-    setTimeout(() => {
-        if (loading) loading.classList.add('hidden');
+// Loading Animation & Initializations
+function deactivateLoading() {
+    if (loading && !loading.classList.contains('hidden')) {
+        loading.classList.add('hidden');
         initAnimations();
-    }, 1000);
-});
+    }
+}
+
+// Deactivate loading screen as soon as DOM is parsed
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(deactivateLoading, 500);
+} else {
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(deactivateLoading, 500);
+    });
+}
+
+// Ultimate safety fallbacks to guarantee page loads under any network constraints
+window.addEventListener('load', deactivateLoading);
+setTimeout(deactivateLoading, 2500); // 2.5s maximum load boundary
 
 // Theme Toggle
 themeToggle.addEventListener('click', function () {
