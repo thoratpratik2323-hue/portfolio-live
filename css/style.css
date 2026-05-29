@@ -1756,9 +1756,16 @@ html.lenis {
 }
 
 /* Terminal Manifest CSS */
+.dossier-bio-section,
+.dossier-specs-section {
+    min-width: 0 !important;
+}
+
 .terminal-manifest {
     font-family: 'Courier New', Courier, monospace;
     color: var(--light);
+    min-width: 0 !important;
+    width: 100% !important;
 }
 
 .terminal-banner {
@@ -1771,11 +1778,19 @@ html.lenis {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    width: 100%;
 }
 
 .terminal-banner span {
-    color: var(--border-color);
-    opacity: 0.5;
+    border-bottom: 1px solid var(--border-color);
+    height: 0;
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    color: transparent;
+    overflow: hidden;
+    user-select: none;
+    opacity: 0.3;
 }
 
 .terminal-meta-grid {
@@ -1818,23 +1833,27 @@ html.lenis {
 }
 
 .terminal-separator {
-    color: var(--border-color);
-    opacity: 0.5;
+    border-bottom: 1px dashed var(--border-color);
+    height: 0;
+    opacity: 0.3;
     margin-bottom: 25px;
-    letter-spacing: -0.05em;
     display: block;
-    max-width: 100%;
+    width: 100%;
+    color: transparent;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: clip;
+    user-select: none;
 }
 
 .terminal-banner span {
+    border-bottom: 1px solid var(--border-color);
+    height: 0;
+    margin-top: 5px;
     display: block;
-    max-width: 100%;
+    width: 100%;
+    color: transparent;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: clip;
+    user-select: none;
+    opacity: 0.3;
 }
 
 .terminal-section {
