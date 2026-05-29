@@ -2264,10 +2264,20 @@ html.lenis {
     /* Dossier console box padding tweaks */
     .console-body {
         padding: 20px !important;
+        overflow: visible !important;
     }
     
     .dossier-spec-group {
         padding: 18px !important;
+    }
+    
+    .spec-group-header {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+    
+    .spec-group-header h4 {
+        font-size: 1rem !important;
     }
     
     /* Flex wrap terminal footer elements */

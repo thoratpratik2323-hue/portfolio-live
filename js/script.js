@@ -192,7 +192,9 @@ type();
 
 // 1. Lenis Smooth Scrolling
 let lenis;
-if (typeof Lenis !== 'undefined') {
+// Disable Lenis smooth scrolling on touch devices and small viewports to prevent scroll boundary locking and ensure native momentum scrolling
+const isMobileOrTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 768;
+if (typeof Lenis !== 'undefined' && !isMobileOrTouch) {
     lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
